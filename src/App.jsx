@@ -19,28 +19,11 @@ function App() {
   //   </>
   // )
 
-  return loading ? (
-    // <Loader />
-    <div>Loading...</div>
-  ) : (
+  return (
     <BrowserRouter>
       <Routes>
-        {!isAuthenticated && <Route path="/" element={<Login/>} />}
-
-        {/* {isAuthenticated && (
-          <Route path="/" element={<MainlLayout />}>
-            <Route index element={<IndexDashBoard />} />
-            <Route path="LiveChats" element={<IndexLiveChats />} />
-            <Route path="BotChats" element={<IndexBotChats />} />
-            <Route path="SelectBotChats" element={<SelectBotChats />} />
-            <Route path="BotIndex" element={<BotIndex />} />
-            <Route path="Bot1" element={<Bot1 />} />
-            <Route path="Botchat1" element={<ChatWindow />} />
-            <Route path="Botchat2" element={<ChatWindow />} />
-            <Route path="Botchat3" element={<ChatWindow />} />
-            <Route path="CreateBot" element={<CreateBot />} />
-          </Route>
-        )} */}
+         <Route path="/" element={<Login/>} />
+    
 
         <Route path="/*" element={<Navigate to="/" />} />
       </Routes>
