@@ -1,30 +1,32 @@
 import React from "react";
 import { useState } from "react";
-// import { auth } from "../../firebase";
+import { auth } from "../../firebase";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
-
-const Login = ({showLogin,setShowLogin}) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const Login = ({ showLogin, setShowLogin }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const toggleLogin = () => {
-    setShowLogin(!showLogin)
-  }
+    setShowLogin(!showLogin);
+  };
   const auth = getAuth();
+  const navigate = useNavigate(); // Access the navigate function
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      await signInWithEmailAndPassword(auth,email, password);
+      await signInWithEmailAndPassword(auth, email, password);
       // Redirect to protected route or display success message
-      console.log("logged in")
-      
+      console.log("logged in");
+      navigate("/Dashboard"); // Redirect to the protected route
     } catch (error) {
       console.error(error);
       // Display error message to the user
     }
   };
-  
+
   return (
     <>
       <section className="bg-gray-500">

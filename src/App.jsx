@@ -4,6 +4,7 @@ import './App.css'
 import Navbar from './Components/Navbar'
 import Login from './Components/Login'
 import LandingPage from './pages/LandingPage';
+import AfterloginDashboard from './pages/AfterloginDashboard';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
     <BrowserRouter>
       <Routes>
          <Route path="/" element={<LandingPage/>} />
+         <Route path="/Dashboard" element={<AfterloginDashboard/>}/>
     
 
         <Route path="/*" element={<Navigate to="/" />} />
