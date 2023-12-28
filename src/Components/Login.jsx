@@ -1,10 +1,29 @@
 import React from "react";
 import { useState } from "react";
+// import { auth } from "../../firebase";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
 
 const Login = ({showLogin,setShowLogin}) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const toggleLogin = () => {
     setShowLogin(!showLogin)
   }
+  const auth = getAuth();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await signInWithEmailAndPassword(auth,email, password);
+      // Redirect to protected route or display success message
+      console.log("logged in")
+      
+    } catch (error) {
+      console.error(error);
+      // Display error message to the user
+    }
+  };
   
   return (
     <>
@@ -26,7 +45,7 @@ const Login = ({showLogin,setShowLogin}) => {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Sign in to your account
               </h1>
-              <form className="space-y-4 md:space-y-6" action="#">
+              <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                 <div>
                   <label
                     htmlFor="email"
@@ -38,6 +57,8 @@ const Login = ({showLogin,setShowLogin}) => {
                     type="email"
                     name="email"
                     id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="name@company.com"
                     required=""
@@ -54,6 +75,8 @@ const Login = ({showLogin,setShowLogin}) => {
                     type="password"
                     name="password"
                     id="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required=""
