@@ -3,19 +3,19 @@ import React, { useState, useEffect } from "react";
 const Navbar = () => {
   return (
     <>
-      <nav className="border-gray-200 bg-blue-500">
+      <nav className="border-gray-200 bg-blue-500 sticky top-0 ">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <a
             href="#"
             className="flex items-center space-x-3 rtl:space-x-reverse"
           >
-            <img
+            {/* <img
               src="https://flowbite.com/docs/images/logo.svg"
               className="h-8"
               alt="Flowbite Logo"
-            />
+            /> */}
             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-              Flowbite
+              Audio Confidence Estimation
             </span>
           </a>
           <button
@@ -25,7 +25,7 @@ const Navbar = () => {
             aria-controls="navbar-solid-bg"
             aria-expanded="false"
           >
-            <span className="sr-only">Open main menu</span>
+            
             <svg
               className="w-5 h-5"
               aria-hidden="true"
