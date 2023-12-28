@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
-import Navbar from './Components/Navbar'
+// import Navbar from './Components/Navbar'
+import Login from './Components/Login'
 
 
 function App() {
@@ -8,7 +9,8 @@ function App() {
 
   return (
     <>
-    <Navbar/>
+    {/* <Navbar/> */}
+    <Login/>
       
     </>
   )
