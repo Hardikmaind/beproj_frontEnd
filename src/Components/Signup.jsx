@@ -19,7 +19,7 @@ function Signup({ showLogin, setShowLogin }) {
 
     try {
       await createUserWithEmailAndPassword(auth,email, password);
-      console.log("i am logged in")
+      console.log("i am registerd successfully")
       // Redirect to protected route or display success message
     } catch (error) {
       console.error(error);
