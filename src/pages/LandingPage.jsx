@@ -12,7 +12,7 @@ function LandingPage() {
         <Signup showLogin={showLogin} setShowLogin={setShowLogin} />
       )}
     
-    </>
+    </> 
   );
 }
 
