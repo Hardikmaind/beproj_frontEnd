@@ -20,7 +20,7 @@ const Login = ({ showLogin, setShowLogin }) => {
       await signInWithEmailAndPassword(auth, email, password);
       // Redirect to protected route or display success message
       console.log("logged in");
-      navigate("/Dashboard"); // Redirect to the protected route
+      navigate("/Dashboard",{ replace: true } ); // Redirect to the protected route
     } catch (error) {
       console.error(error);
       // Display error message to the user
