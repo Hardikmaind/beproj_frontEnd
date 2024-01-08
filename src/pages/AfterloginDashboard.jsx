@@ -3,7 +3,7 @@ import Navbar from "../Components/Navbar";
 
 const AfterloginDashboard = () => {
   return (
-    <>
+    <div className="fixed top-0 h-screen w-screen ">
       <div className=" sticky top-0">
         <Navbar />
       </div>
@@ -57,10 +57,14 @@ const AfterloginDashboard = () => {
                 so far, in reverse chronological order.
               </p>
             </div>
+            
           </a>
+          
         </div>
+        
       </div>
-    </>
+      
+    </div>
   );
 };
 

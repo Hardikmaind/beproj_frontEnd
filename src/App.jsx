@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, Form } from "react-router-dom";
 import './App.css'
 import Navbar from './Components/Navbar'
 import Login from './Components/Login'
 import LandingPage from './pages/LandingPage';
 import AfterloginDashboard from './pages/AfterloginDashboard';
+import FormModal from './Components/FormModal';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Route path="/*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>
+    // <FormModal/>
   );
 
 }
