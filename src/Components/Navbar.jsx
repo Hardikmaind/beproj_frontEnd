@@ -15,7 +15,7 @@ const Navbar = () => {
   };
   return (
     <div>
-      <nav className="bg-blue-500 p-4">
+      <nav className="bg-blue-500 p-3">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
           <a href="#" className="flex items-center space-x-3">
             <span className="text-2xl font-semibold text-white">
