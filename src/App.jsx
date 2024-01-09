@@ -18,24 +18,27 @@ function App() {
 
   return (
     <BrowserRouter>
-    <Layout>
+      {/* <Layout> */}
       <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/Page404" element={<Page404 />} />
-        <Route
-          path="/Dashboard"
-          replace
-          element={
-            <ProtectedRoute>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/Page404" element={<Page404 />} />
+      {/* <ProtectedRoute> */}
+        <Route path="/" element={<Layout />}>
+          <Route
+            path="/Dashboard"
+            replace
+            element={
                 <AfterloginDashboard />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="/xyz" element={<Xyz/>} />
-   {/* if entered anything else after / which are not present in the route then this will be redirect to the "/" route which will be the login */}
+            }
+          />
+          <Route path="/xyz" element={<Xyz />} />
+
+          {/* if entered anything else after / which are not present in the route then this will be redirect to the "/" route which will be the login */}
+        </Route>
+        {/* </ProtectedRoute> */}
         <Route path="/*" element={<Navigate to="/Page404" />} />
       </Routes>
-      </Layout>
+      {/* </Layout> */}
     </BrowserRouter>
     // <FormModal/>
   );
