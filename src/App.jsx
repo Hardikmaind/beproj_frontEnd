@@ -8,6 +8,7 @@ import AfterloginDashboard from "./pages/AfterloginDashboard";
 import FormModal from "./Components/FormModal";
 import ProtectedRoute from "./routes/Protected";
 import Page404 from "./pages/Page404";
+import Layout from "./layout/layout";
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -16,6 +17,7 @@ function App() {
 
   return (
     <BrowserRouter>
+    <Layout>
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/Page404" element={<Page404 />} />
@@ -24,13 +26,14 @@ function App() {
           replace
           element={
             <ProtectedRoute>
-              <AfterloginDashboard />
+                <AfterloginDashboard />
             </ProtectedRoute>
           }
         />
-{/* if entered anything else after / which are not present in the route then this will be redirect to the "/" route which will be the login */}
+   {/* if entered anything else after / which are not present in the route then this will be redirect to the "/" route which will be the login */}
         <Route path="/*" element={<Navigate to="/Page404" />} />
       </Routes>
+      </Layout>
     </BrowserRouter>
     // <FormModal/>
   );
