@@ -9,6 +9,7 @@ import FormModal from "./Components/FormModal";
 import ProtectedRoute from "./routes/Protected";
 import Page404 from "./pages/Page404";
 import Layout from "./layout/layout";
+import Xyz from "./pages/Xyz";
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -30,6 +31,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="/xyz" element={<Xyz/>} />
    {/* if entered anything else after / which are not present in the route then this will be redirect to the "/" route which will be the login */}
         <Route path="/*" element={<Navigate to="/Page404" />} />
       </Routes>
