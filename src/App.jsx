@@ -29,7 +29,7 @@ function App() {
           }
         />
 {/* if entered anything else after / which are not present in the route then this will be redirect to the "/" route which will be the login */}
-        <Route path="/*" element={<Navigate to="/" />} />
+        <Route path="/*" element={<Navigate to="/Page404" />} />
       </Routes>
     </BrowserRouter>
     // <FormModal/>
