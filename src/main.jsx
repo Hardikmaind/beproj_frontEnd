@@ -12,17 +12,3 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   </React.StrictMode>
 );
 
-// // index.js or main.js
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import App from './App';
-// import { AuthProvider } from './context/AuthContext';
-
-// ReactDOM.render(
-//   <React.StrictMode>
-//     <AuthProvider>
-//       <App />
-//     </AuthProvider>
-//   </React.StrictMode>,
-//   document.getElementById('root')
-// );
