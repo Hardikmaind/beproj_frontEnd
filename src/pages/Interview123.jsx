@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Xyz = () => {
+const Interview = () => {
   return (
     <div>
       
@@ -27,4 +27,4 @@ const Xyz = () => {
   )
 }
 
-export default Xyz
+export default Interview
