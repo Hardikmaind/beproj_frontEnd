@@ -1,14 +1,15 @@
 
+import { Outlet } from "react-router";
 import Navbar from "../Components/Navbar";
 
 
-const layout = ({children}) => {
+const layout = () => {
   return (
     <div>
       <div className=" sticky top-0">
         <Navbar />
       </div>
-     {children}
+    <Outlet/>
     </div>
   )
 }
