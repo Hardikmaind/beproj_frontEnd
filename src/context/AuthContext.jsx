@@ -28,19 +28,25 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logOut = () => {
+    localStorage.removeItem('user');
     return signOut();
   };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
+      if (user) {
+        localStorage.setItem('user', JSON.stringify(user));
+      } else {
+        localStorage.removeItem('user');
+      }
     });
   
     return unsubscribe;
   }, [auth]); // Add auth as a dependency
   
 
-  const isAuthenticated = !!currentUser;
+  const isAuthenticated = !!localStorage.getItem('user');
 
   const value = {
     currentUser,
