@@ -25,6 +25,7 @@ function App() {
           <Route path="/*" element={<Layout />}>
             <Route index element={<AfterloginDashboard />} />
             <Route path="xyz" element={<Xyz />} />
+            <Route path="*" element={<Page404 />} />
           </Route>
         ) : (
           // If not authenticated, redirect to the LandingPage
