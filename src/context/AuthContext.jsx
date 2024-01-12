@@ -18,6 +18,7 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
+  // const[modalOn, ]
 
   const signUp = (email, password) => {
     return createUserWithEmailAndPassword(auth,email, password);

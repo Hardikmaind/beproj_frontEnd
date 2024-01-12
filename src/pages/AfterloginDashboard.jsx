@@ -1,12 +1,13 @@
 import React from "react";
 import Navbar from "../Components/Navbar";
 import Card from "../Components/card";
-import xyz from "./Interview123";
 import { Link } from "react-router-dom";
+import FormModal from "../Components/FormModal";
 // import { useAuth } from "../context/AuthContext";
 const AfterloginDashboard = () => {
   // const auth = useAuth();
   // console.log(auth.isAuthenticated);
+
   return (
     <>
       <div className="flex  mt-4 mx-auto text-6xl justify-center">
@@ -33,6 +34,7 @@ const AfterloginDashboard = () => {
         {/* </div> */}
       </div>
       {/* <span  className="text-4xl"></span> */}
+      {/* <FormModal/> */}
     </>
   );
 };
