@@ -1,11 +1,13 @@
 import React from "react";
 import { getAuth, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 
 const Navbar = () => {
   const auth = getAuth();
   const navigate = useNavigate(); // Access the navigate function
+  const { userData } = useAuth();
 
   const handleSignOut = async () => {
     await auth.signOut();
@@ -46,7 +48,7 @@ const Navbar = () => {
           </button>
           <div className="hidden w-full md:block md:w-auto">
             <ul className="flex flex-col font-medium mt-4 bg-gray-800 rounded-lg md:space-x-4 md:flex-row md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
-              <li>
+              {/* <li>
                 <a
                   href="#"
                   className="block py-2 px-3 md:p-0 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-500 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent transition-all duration-300 hover:text-black hover:bg-gray-700 hover:border border-gray-700"
@@ -54,7 +56,7 @@ const Navbar = () => {
                 >
                   Home
                 </a>
-              </li>
+              </li> */}
               {/* <li>
                 <button
                   href="#"
@@ -62,15 +64,15 @@ const Navbar = () => {
                 >
                   <div className="py-2 px-6">Services</div>
                 </button>
-              </li>
-              <li>
-                <button
-                  href="#"
-                  className="block p-9 md:p-0 text-white rounded  md:hover:text-gray-950 md:dark:hover:bg-transparent transition-all duration-300 hover:text-black hover:bg-gray-700 border-gray-700 border-2"
-                >
-                  <div className="py-2 px-6">Pricing</div>
-                </button>
               </li> */}
+              <li>
+                <div
+                  href="#"
+                  className="block p-9 md:p-0 text-white rounded  md:hover:text-gray-950 md:dark:hover:bg-transparent transition-all duration-300 hover:text-black hover:bg-gray-700 "
+                >
+                  <div className="py-2 px-6">Welcome {userData && userData.user_name}</div>
+                </div>
+              </li>
               <li>
                 <button
                   onClick={handleSignOut}

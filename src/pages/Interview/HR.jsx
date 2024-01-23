@@ -1,5 +1,5 @@
 import React from 'react'
-import AudioRecorder from '../../Components/audiorecordercomponent'
+// import AudioRecorder from '../../Components/audiorecordercomponent'
 import QA from '../../Components/QA'
 
 

@@ -18,6 +18,9 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
+  const [userData, setUserData] = useState({
+    user_name:"",
+  });
   // const[modalOn, ]
 
   const signUp = (email, password) => {
@@ -55,6 +58,8 @@ export const AuthProvider = ({ children }) => {
     logIn,
     logOut,
     isAuthenticated,
+    userData,
+    setUserData,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

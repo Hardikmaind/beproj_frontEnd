@@ -196,7 +196,7 @@ import { useAuth } from "../context/AuthContext";
 import AxiosInstance from "../api/AxiosInstance";
 
 const AfterloginDashboard = () => {
-  const { currentUser } = useAuth();
+  const { currentUser ,setUserData ,userData} = useAuth();
   const [is_registered, setIs_registered] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -205,7 +205,7 @@ const AfterloginDashboard = () => {
       try {
         if (!currentUser) {
           // Handle the case when currentUser is not available
-          console.error("Current user not available");
+          // console.error("Current user not available");
           return;
         }
   
@@ -218,6 +218,11 @@ const AfterloginDashboard = () => {
         });
 
         setIs_registered(res.data.user.is_registered);
+        setUserData({
+          ...userData,
+          user_name:res.data.user.user_name,
+        });
+        console.log(userData)
         console.log(is_registered);
 
         // If user is not registered, show the modal
@@ -225,7 +230,7 @@ const AfterloginDashboard = () => {
           setModalVisible(true);
         }
 
-        console.log("API call success", res.data);
+        // console.log("API call success", res.data);
       } catch (error) {
         console.error("API call error", error);
       }
