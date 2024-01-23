@@ -1,12 +1,13 @@
 import React from 'react'
 import AudioRecorder from '../../Components/audiorecordercomponent'
+import QA from '../../Components/QA'
 
 
 const HR = () => {
   return (
-    <div>
-      <h1 className="text-5xl">HR Interview</h1>
-      <AudioRecorder />
+    <div className="bg-gray-100 ">
+      <h6 className="text-5xl">HR Interview</h6>
+      <QA/>
     </div>
   )
 }

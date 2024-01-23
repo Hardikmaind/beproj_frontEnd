@@ -10,6 +10,7 @@ import Layout from "./layout/layout";
 import { useAuth } from "./context/AuthContext"; // Assuming you have an AuthContext
 import Techincal from "./pages/Interview/Technical";
 import HR from "./pages/Interview/HR";
+import Feedback from "./pages/Feedback";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
             <Route index element={<AfterloginDashboard />} />
             <Route path="Technical-Interview" element={<Techincal />} />
             <Route path="HR-Interview" element={<HR />} />
+            <Route path="feedback" element={<Feedback/>} />
             <Route path="*" element={<Page404 />} />
           </Route>
         ) : (
