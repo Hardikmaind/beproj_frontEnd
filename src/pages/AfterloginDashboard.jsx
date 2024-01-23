@@ -192,7 +192,8 @@ import { Link } from "react-router-dom";
 import Card from "../Components/card";
 import FormModal from "../Components/FormModal";
 import { useAuth } from "../context/AuthContext";
-import  Axios  from "axios";
+// import  Axios  from "axios";
+import AxiosInstance from "../api/AxiosInstance";
 
 const AfterloginDashboard = () => {
   const { currentUser } = useAuth();
@@ -210,7 +211,7 @@ const AfterloginDashboard = () => {
   
         const idToken = await currentUser.getIdToken();
 
-        const res = await Axios.get("http://127.0.0.1:8000/api/create_user/", {
+        const res = await AxiosInstance.get("create_user/", {
           headers: {
             Authorization: `Bearer ${idToken}`,
           },

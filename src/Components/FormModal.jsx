@@ -228,6 +228,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import {useAuth}  from '../context/AuthContext' // Update the path
+import AxiosInstance from "../api/AxiosInstance";
+
 
 const FormModal = () => {
   // const { currentUser } = useAuth();  // Use the currentUser from AuthContext
@@ -342,7 +344,7 @@ const FormModal = () => {
 
       const idToken = await currentUser.getIdToken();
 
-      const response = await axios.post("http://127.0.0.1:8000/api/create_user/", {
+      const response = await AxiosInstance.post("create_user/", {
         user_name: formData.user_name,
         gender: formData.gender,
         firebase_id_token: idToken,

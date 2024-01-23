@@ -4,10 +4,13 @@ const AxiosInstance = axios.create({
   baseURL: 'http://127.0.0.1:8000/api/',
 });
 AxiosInstance.interceptors.request.use(async (request) => {
+
   const access_token = localStorage.getItem('access_token');
-//   if (access_token) {
-//     request.headers['Authorization'] = `Bearer ${access_token}`;
-//   }
+  if (access_token) {
+    request.headers['Authorization'] = `Bearer ${access_token}`;
+  }
   return request;
 });
 export default AxiosInstance;
+
+
