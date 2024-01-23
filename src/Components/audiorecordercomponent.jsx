@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import AxiosInstance from "../api/AxiosInstance";
 
 const AudioRecorder = () => {
     const [permission, setPermission] = useState(false);
@@ -37,14 +38,12 @@ const AudioRecorder = () => {
             const formData = new FormData();
             formData.append("audio", audioBlob, "recorded_audio.wav");
 
-            // Now you can send the formData to your API
-            // Example using fetch:
-            fetch("your-api-endpoint", {
-                method: "POST",
-                body: formData,
-            })
-                .then(response => response.json())
-                .then(data => console.log(data))
+            // Now you can send the formData to your API using Axios
+            AxiosInstance.post("get_audio/", formData)
+                .then(response => {
+                    // Handle the response here
+                    console.log(response.data);
+                })
                 .catch(error => console.error("Error sending audio:", error));
 
             chunksRef.current = [];

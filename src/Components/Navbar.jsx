@@ -55,7 +55,7 @@ const Navbar = () => {
                   Home
                 </a>
               </li>
-              <li>
+              {/* <li>
                 <button
                   href="#"
                   className="block  md:p-0 text-white rounded  md:hover:text-gray-950 md:dark:hover:bg-transparent transition-all duration-300 hover:text-black hover:bg-gray-700 border-gray-700 border-2"
@@ -70,7 +70,7 @@ const Navbar = () => {
                 >
                   <div className="py-2 px-6">Pricing</div>
                 </button>
-              </li>
+              </li> */}
               <li>
                 <button
                   onClick={handleSignOut}
