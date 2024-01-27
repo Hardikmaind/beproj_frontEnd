@@ -11,6 +11,7 @@ import { useAuth } from "./context/AuthContext"; // Assuming you have an AuthCon
 import Techincal from "./pages/Interview/Technical";
 import HR from "./pages/Interview/HR";
 import Result from "./pages/Result";
+import AudioRecorder from "./Components/AudioRecorder";
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
             <Route path="Technical-Interview" element={<Techincal />} />
             <Route path="HR-Interview" element={<HR />} />
             <Route path="Result" element={<Result/>} />
+            <Route path="Audio" element={<AudioRecorder/>} />
             <Route path="*" element={<Page404 />} />
           </Route>
         ) : (
