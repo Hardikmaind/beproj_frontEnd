@@ -35,17 +35,27 @@ const AudioRecorder = () => {
     mediaRecorder.start();
   };
 
-  const stopRec = () => {
-    const elapsedTime = Date.now() - startTimeRef.current;
+  //The function the timelimit
+  // const stopRec = () => {
+  //   const elapsedTime = Date.now() - startTimeRef.current;
 
-    // Check if recording duration is at least 30 seconds
-    if (elapsedTime >= 30000) {
-      mediaRecorderRef.current.stop();
-    } else {
-      alert("Recording must be at least 30 seconds");
-   // Handle the case where the recording is less than 30 seconds
-    }
+  //   // Check if recording duration is at least 30 seconds
+  //   if (elapsedTime >= 30000) {
+  //     mediaRecorderRef.current.stop();
+  //   } else {
+  //     alert("Recording must be at least 30 seconds");
+  //  // Handle the case where the recording is less than 30 seconds
+  //   }
   
+  // };
+
+  const stopRec = () => {
+    if (
+      mediaRecorderRef.current &&
+      mediaRecorderRef.current.state === "recording"
+    ) {
+      mediaRecorderRef.current.stop();
+    }
   };
 
   return (
