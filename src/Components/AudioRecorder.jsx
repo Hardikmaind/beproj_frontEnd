@@ -6,7 +6,12 @@ const AudioRecorder = () => {
   const[recording,setRecording]=useState(null);
   const mediaRecorderRef = useRef(null);
 
+  const startTimeRef = useRef(null);
+
   const startRec = async () => {
+    // Clear the previous recording data
+    audioChunk.current = [];
+
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     const mediaRecorder = new MediaRecorder(stream);
 
@@ -24,16 +29,23 @@ const AudioRecorder = () => {
       console.log("Audio",audioBlob);
     };
     mediaRecorderRef.current = mediaRecorder;
+
+    startTimeRef.current = Date.now();
+
     mediaRecorder.start();
   };
 
   const stopRec = () => {
-    if (
-      mediaRecorderRef.current &&
-      mediaRecorderRef.current.state === "recording"
-    ) {
+    const elapsedTime = Date.now() - startTimeRef.current;
+
+    // Check if recording duration is at least 30 seconds
+    if (elapsedTime >= 30000) {
       mediaRecorderRef.current.stop();
+    } else {
+      alert("Recording must be at least 30 seconds");
+   // Handle the case where the recording is less than 30 seconds
     }
+  
   };
 
   return (

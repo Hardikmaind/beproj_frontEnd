@@ -10,7 +10,7 @@ const QA = () => {
   const [isHovered1, setIsHovered1] = useState(false);
   const [isHovered2, setIsHovered2] = useState(false);
 
-  const [audioBlob, setAudioBlob] = useState(null); // State to store the recorded audio
+  // State to store the recorded audio
   const [recording, setRecording] = useState(false); // State to track recording status
 
   const recorderRef = useRef(null);
@@ -69,7 +69,6 @@ const QA = () => {
 
           <div className="flex flex-row mt-8 justify-between align-items-center">
             <div>
-          
               <button
                 type="button"
                 className="text-white bg-blue-600 hover:bg-blue-700 block font-medium rounded-xl text-center text-xl px-10 py-7 me-2 mb-2"
