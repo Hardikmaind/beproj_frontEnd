@@ -1,9 +1,10 @@
-import React, { useState, useEffect ,useRef} from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import { AiFillAudio } from "react-icons/ai";
 import { GrLinkNext } from "react-icons/gr";
 import { GrLinkPrevious } from "react-icons/gr";
 import AudioRecorder from "./AudioRecorder";
+import { Link } from "react-router-dom";
 
 const QA = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -20,54 +21,54 @@ const QA = () => {
 
   const handleMouseEnter1 = () => {
     setIsHovered1(true);
-  }
+  };
 
   const handleMouseLeave1 = () => {
     setIsHovered1(false);
-    }
+  };
 
   const handleMouseEnter2 = () => {
     setIsHovered2(true);
-    }
+  };
 
   const handleMouseLeave2 = () => {
     setIsHovered2(false);
-    }
+  };
 
-    const questions = [
-      "Question 1",
-      "Question 2",
-      "Question 3",
-      "Question 4",
-      "Question 5",
-      "Question 6",
-      "Question 7",
-      "Question 8",
-      "Question 9",
-      "Question 10"
-    ];
-  
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  
-    const handleNextQuestion = () => {
-      setCurrentQuestionIndex((prevIndex) =>
-        prevIndex === questions.length - 1 ? 0 : prevIndex + 1
-      );
-    };
-  
-    const handlePreviousQuestion = () => {
-      setCurrentQuestionIndex((prevIndex) =>
-        prevIndex === 0 ? questions.length - 1 : prevIndex - 1
-      );
-    };
+  const questions = [
+    "Question 1",
+    "Question 2",
+    "Question 3",
+    "Question 4",
+    "Question 5",
+    "Question 6",
+    "Question 7",
+    "Question 8",
+    "Question 9",
+    "Question 10",
+  ];
+
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+
+  const handleNextQuestion = () => {
+    setCurrentQuestionIndex((prevIndex) =>
+      prevIndex === questions.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  const handlePreviousQuestion = () => {
+    setCurrentQuestionIndex((prevIndex) =>
+      prevIndex === 0 ? questions.length - 1 : prevIndex - 1
+    );
+  };
 
   return (
     <>
       <div className="w-7/12 h-fit mb-4 border mt-64 border-gray-200 rounded-3xl bg-white mx-auto shadow-2xl py-2">
-        {/* <AudioRecorder/> */}
+        {/* <AudioRecorder /> */}
         <div className="px-5 py-5">
           <div className="text-4xl p-5 leading-relaxed">
-          {questions[currentQuestionIndex]}
+            {questions[currentQuestionIndex]}
           </div>
 
           <hr className="mt-10 -px-5 -py-5" />
@@ -81,12 +82,12 @@ const QA = () => {
                 onMouseLeave={handleMouseLeave}
               >
                 <div className="flex flex-row justify-center align-items-center">
-              {" "}
-              <span className="text-xl mr-3">
-                <AiFillAudio fontSize={28} />
-              </span>
-              Answer
-            </div>
+                  {" "}
+                  <span className="text-xl mr-3">
+                    <AiFillAudio fontSize={28} />
+                  </span>
+                  Answer
+                </div>
               </button>
               {isHovered && (
                 <div className="absolute bg-slate-700 text-white p-2 rounded-md mt-1">
@@ -101,33 +102,53 @@ const QA = () => {
                 onMouseEnter={handleMouseEnter1}
                 onMouseLeave={handleMouseLeave1}
                 onClick={handlePreviousQuestion}
+                disabled={currentQuestionIndex === 0}
               >
                 <GrLinkPrevious size={20} color="blue" />
               </button>
               {isHovered1 && (
                 <div className="absolute bg-slate-700 text-white p-2 rounded-md mt-1">
-                    Previous Question
+                  Previous Question
                 </div>
               )}
 
-              <button
-                className="border border-blue-400 px-7 py-7 rounded-2xl mb-2 hover:bg-blue-50 cursor-pointer"
-                onMouseEnter={handleMouseEnter2}
-                onMouseLeave={handleMouseLeave2}
-                onClick={handleNextQuestion}
-              >
-                <GrLinkNext size={20} color="blue" />
-              </button>
+            
+                {currentQuestionIndex === questions.length - 1 ? (
+                  // If it's the last question, display Finish Interview message
+                  <Link
+                  className="border border-blue-400 px-7 py-7 rounded-2xl mb-2 hover:bg-blue-50 cursor-pointer"
+                  onMouseEnter={handleMouseEnter2}
+                  onMouseLeave={handleMouseLeave2}
+                  onClick={handleNextQuestion}
+                  to="/Result"
+                >
+                  End
+                </Link>
+                  
+                ) : (
+                  // Otherwise, display the Next button
+                  <button
+                  className="border border-blue-400 px-7 py-7 rounded-2xl mb-2 hover:bg-blue-50 cursor-pointer"
+                  onMouseEnter={handleMouseEnter2}
+                  onMouseLeave={handleMouseLeave2}
+                  onClick={handleNextQuestion}
+                >
+                   <GrLinkNext size={20} color="blue" />
+                </button>
+                )}
+              
+
               {isHovered2 && (
-                <div className="absolute bg-slate-700 text-white p-2 rounded-md mt-1"  >
-                    Next Question
+                <div className="absolute bg-slate-700 text-white p-2 rounded-md mt-1">
+                  {currentQuestionIndex === questions.length - 1
+                    ? "Finish Interview"
+                    : "Next Question"}
                 </div>
               )}
             </div>
           </div>
         </div>
       </div>
-      
     </>
   );
 };
