@@ -192,6 +192,7 @@ import { Link } from "react-router-dom";
 import Card from "../Components/card";
 import FormModal from "../Components/FormModal";
 import { useAuth } from "../context/AuthContext";
+import useFetch from "../hooks/useFetch";
 // import  Axios  from "axios";
 import AxiosInstance from "../api/AxiosInstance";
 
@@ -199,6 +200,10 @@ const AfterloginDashboard = () => {
   const { currentUser ,setUserData ,userData} = useAuth();
   const [is_registered, setIs_registered] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const fetchquestions = () => {
+
+    const { data, loading, error } = useFetch("tech_questions/");
+  };
 
   useEffect(() => {
     const callApi = async () => {
@@ -249,7 +254,7 @@ const AfterloginDashboard = () => {
         Choose Interview Type
       </div>
       <div className="mt-56 flex justify-center">
-        <Link className="mx-16" to="/Technical-Interview">
+        <Link className="mx-16" to="/Technical-Interview" onClick={()=>fetchquestions()}>
           <Card
             Type="Technical"
             detail="An audio-based technical interview assesses a candidate's proficiency in relevant technical skills solely through auditory means. It involves discussing and solving technical problems, explaining concepts, and demonstrating problem-solving abilities, all conducted through spoken communication."

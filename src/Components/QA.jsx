@@ -6,7 +6,7 @@ import { GrLinkPrevious } from "react-icons/gr";
 import AudioRecorder from "./AudioRecorder";
 import { Link } from "react-router-dom";
 
-const QA = () => {
+const QA = (data) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isHovered1, setIsHovered1] = useState(false);
   const [isHovered2, setIsHovered2] = useState(false);
@@ -35,18 +35,13 @@ const QA = () => {
     setIsHovered2(false);
   };
 
-  const questions = [
-    "Question 1",
-    "Question 2",
-    "Question 3",
-    "Question 4",
-    "Question 5",
-    "Question 6",
-    "Question 7",
-    "Question 8",
-    "Question 9",
-    "Question 10",
-  ];
+  // console.log("data", data.data);
+
+
+
+  const questions = data.data.interview_questions.map(
+    (question) => question.question_list
+  );
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
@@ -112,10 +107,9 @@ const QA = () => {
                 </div>
               )}
 
-            
-                {currentQuestionIndex === questions.length - 1 ? (
-                  // If it's the last question, display Finish Interview message
-                  <Link
+              {currentQuestionIndex === questions.length - 1 ? (
+                // If it's the last question, display Finish Interview message
+                <Link
                   className="border border-blue-400 px-7 py-7 rounded-2xl mb-2 hover:bg-blue-50 cursor-pointer"
                   onMouseEnter={handleMouseEnter2}
                   onMouseLeave={handleMouseLeave2}
@@ -124,19 +118,17 @@ const QA = () => {
                 >
                   End
                 </Link>
-                  
-                ) : (
-                  // Otherwise, display the Next button
-                  <button
+              ) : (
+                // Otherwise, display the Next button
+                <button
                   className="border border-blue-400 px-7 py-7 rounded-2xl mb-2 hover:bg-blue-50 cursor-pointer"
                   onMouseEnter={handleMouseEnter2}
                   onMouseLeave={handleMouseLeave2}
                   onClick={handleNextQuestion}
                 >
-                   <GrLinkNext size={20} color="blue" />
+                  <GrLinkNext size={20} color="blue" />
                 </button>
-                )}
-              
+              )}
 
               {isHovered2 && (
                 <div className="absolute bg-slate-700 text-white p-2 rounded-md mt-1">
