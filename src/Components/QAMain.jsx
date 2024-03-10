@@ -1,15 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
-
 import { AiFillAudio } from "react-icons/ai";
 import { GrLinkNext } from "react-icons/gr";
 import { GrLinkPrevious } from "react-icons/gr";
-import AudioRecorder from "./AudioRecorder";
 import { Link } from "react-router-dom";
+import AudioRecorder from "./AudioRecorderMain";
 
 const QA = (data) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isHovered1, setIsHovered1] = useState(false);
   const [isHovered2, setIsHovered2] = useState(false);
+  const [isRecording, setIsRecording] = useState(false);
+  const [recordingUrl, setRecordingUrl] = useState(null);
+  // const [recordingStopped, setRecordingStopped] = useState(false);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -35,9 +37,17 @@ const QA = (data) => {
     setIsHovered2(false);
   };
 
-  // console.log("data", data.data);
+  const handleStartRecording = () => {
+    setIsRecording(true);
+  };
 
+  const handleStopRecording = () => {
+    setIsRecording(false);
+  };
 
+  const handleRecordingEnded = (audioUrl) => {
+    setRecordingUrl(audioUrl);
+  };
 
   const questions = data.data.interview_questions.map(
     (question) => question.question_list
@@ -69,23 +79,42 @@ const QA = (data) => {
 
           <div className="flex flex-row mt-8 justify-between align-items-center">
             <div>
-              <button
-                type="button"
-                className="text-white bg-blue-600 hover:bg-blue-700 block font-medium rounded-xl text-center text-xl px-10 py-7 me-2 mb-2"
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-              >
-                <div className="flex flex-row justify-center align-items-center">
-                  {" "}
-                  <span className="text-xl mr-3">
-                    <AiFillAudio fontSize={28} />
-                  </span>
-                  Answer
-                </div>
-              </button>
+              {!isRecording ? (
+                <button
+                  type="button"
+                  className="text-white bg-blue-600 hover:bg-blue-700 block font-medium rounded-xl text-center text-xl px-10 py-7 me-2 mb-2"
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                  onClick={handleStartRecording}
+                >
+                  <div className="flex flex-row justify-center align-items-center">
+                    {" "}
+                    <span className="text-xl mr-3">
+                      <AiFillAudio fontSize={28} />
+                    </span>
+                    Answer
+                  </div>
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className="text-white bg-green-600 hover:bg-green-700 block font-medium rounded-xl text-center text-xl px-10 py-7 me-2 mb-2"
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                  onClick={handleStopRecording}
+                >
+                  <div className="flex flex-row justify-center align-items-center">
+                    {" "}
+                    <span className="text-xl mr-3">
+                      <AiFillAudio fontSize={28} />
+                    </span>
+                    Done
+                  </div>
+                </button>
+              )}
               {isHovered && (
                 <div className="absolute bg-slate-700 text-white p-2 rounded-md mt-1">
-                  Answer with your mic
+                  {isRecording ? "Stop Recording" : "Answer with your mic"}
                 </div>
               )}
             </div>
@@ -140,6 +169,13 @@ const QA = (data) => {
           </div>
         </div>
       </div>
+      <AudioRecorder
+        isRecording={isRecording}
+        setIsRecording={setIsRecording}
+        onStopRecording={handleStopRecording}
+        onRecordingEnded={handleRecordingEnded}
+        // setRecordingStopped={setRecordingStopped}
+      />
     </>
   );
 };

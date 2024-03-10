@@ -1,5 +1,5 @@
 import React from "react";
-import QA from "../../Components/QA";
+import QA from "../../Components/QAMain";
 import AudioRecorder from "../../Components/AudioRecorder";
 import useFetch from "../../hooks/useFetch";
 
