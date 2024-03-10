@@ -76,7 +76,7 @@ const AudioRecorder = ({
 
   return (
     <div>
-      {/* <audio controls src={recording} /> */}
+      <audio controls src={recording} />
     </div>
   );
 };
