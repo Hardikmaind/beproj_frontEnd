@@ -1,6 +1,4 @@
 import React from "react";
-// import AudioRecorder from '../../Components/audiorecordercomponent'
-// import QA from '../../Components/QA'
 import QA from "../../Components/QAMain";
 import useFetch from "../../hooks/useFetch";
 

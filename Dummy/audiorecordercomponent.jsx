@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import AxiosInstance from "../api/AxiosInstance";
+import AxiosInstance from "../src/api/AxiosInstance";
 
 const AudioRecorder = () => {
     const [permission, setPermission] = useState(false);
