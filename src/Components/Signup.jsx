@@ -1,7 +1,6 @@
-
 // Signup.jsx
-import React, { useState } from 'react';
-import { useAuth } from '../context/AuthContext'; // Import the AuthContext
+import React, { useState } from "react";
+import { useAuth } from "../context/AuthContext"; // Import the AuthContext
 
 function Signup({ showLogin, setShowLogin }) {
   const toggleLogin = () => {
@@ -10,8 +9,8 @@ function Signup({ showLogin, setShowLogin }) {
 
   const auth = useAuth(); // Use the useAuth hook to get authentication context
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,7 +18,7 @@ function Signup({ showLogin, setShowLogin }) {
     try {
       // Use signUp function from the context
       await auth.signUp(email, password);
-      console.log('I am registered successfully');
+      console.log("I am registered successfully");
       // Redirect to protected route or display success message
     } catch (error) {
       console.error(error);
@@ -29,9 +28,8 @@ function Signup({ showLogin, setShowLogin }) {
 
   return (
     <>
-      <section className="bg-gray-50 ">
+      <section className="w-full">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-          
           <div className="w-full bg-white rounded-lg shadow  md:mt-0 sm:max-w-md xl:p-0 ">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
@@ -51,7 +49,7 @@ function Signup({ showLogin, setShowLogin }) {
                     id="email"
                     autoComplete="email"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)} 
+                    onChange={(e) => setEmail(e.target.value)}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-[#2563eb] focus:border-[#2563eb] block w-full p-2.5"
                     placeholder="name@company.com"
                     required=""

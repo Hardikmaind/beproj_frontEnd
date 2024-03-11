@@ -1,13 +1,11 @@
-
-
 // Login.jsx
-import React, { useState } from 'react';
-import { useAuth } from '../context/AuthContext'; // Import the AuthContext
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useAuth } from "../context/AuthContext"; // Import the AuthContext
+import { useNavigate } from "react-router-dom";
 
 const Login = ({ showLogin, setShowLogin }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const toggleLogin = () => {
     setShowLogin(!showLogin);
   };
@@ -20,8 +18,8 @@ const Login = ({ showLogin, setShowLogin }) => {
 
     try {
       await auth.logIn(email, password); // Use signIn function from the context
-      console.log('Logged in');
-      navigate('/', { replace: true }); // Redirect to the protected route
+      console.log("Logged in");
+      navigate("/", { replace: true }); // Redirect to the protected route
     } catch (error) {
       console.error(error);
       // Display error message to the user
@@ -30,9 +28,8 @@ const Login = ({ showLogin, setShowLogin }) => {
 
   return (
     <>
-      <section className="bg-gray-50 ">
+      <section className="w-full">
         <div className="flex flex-col items-center justify-center min-h-screen px-6 py-8 mx-auto md:py-0">
-          
           <div className="w-full bg-white rounded-lg shadow  md:mt-0 sm:max-w-md xl:p-0 ">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
