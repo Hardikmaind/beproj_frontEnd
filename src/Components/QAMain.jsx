@@ -5,6 +5,7 @@ import { GrLinkPrevious } from "react-icons/gr";
 import { Link } from "react-router-dom";
 import AudioRecorder from "./AudioRecorderMain";
 import AxiosInstance from "../api/AxiosInstance";
+import Loader_gif from "../assets/images/Loader_gif.gif";
 
 const QA = (data) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -13,26 +14,25 @@ const QA = (data) => {
   const [isRecording, setIsRecording] = useState(false);
   const [recordingUrl, setRecordingUrl] = useState(null);
   const [recordedAudioBlob, setRecordedAudioBlob] = useState(null);
+  const [loading, setLoading] = useState(false);
   console.log(recordedAudioBlob);
   // const [recordingStopped, setRecordingStopped] = useState(false);
   const handleUpload = async (recordedAudioBlob) => {
     const formData = new FormData();
     formData.append("audio", recordedAudioBlob, "audio.wav");
-
+    setLoading(true); // Set loading to true before uploading
     try {
-      const response = await AxiosInstance.post(
-        "upload_audio/",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const response = await AxiosInstance.post("upload_audio/", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       console.log("Audio uploaded successfully:", response.data);
     } catch (error) {
       console.error("Error during audio upload:", error);
+    } finally {
+      setLoading(false); // Set loading to false after uploading
     }
   };
 
@@ -93,108 +93,120 @@ const QA = (data) => {
 
   return (
     <>
-      <div className="w-7/12 h-fit mb-4 border mt-64 border-gray-200 rounded-3xl bg-white mx-auto shadow-2xl py-2">
-        <div className="px-5 py-5">
-          <div className="text-4xl p-5 leading-relaxed">
-            {questions[currentQuestionIndex]}
-          </div>
-
-          <hr className="mt-10 -px-5 -py-5" />
-
-          <div className="flex flex-row mt-8 justify-between align-items-center">
-            <div>
-              {!isRecording ? (
-                <button
-                  type="button"
-                  className="text-white bg-blue-600 hover:bg-blue-700 block font-medium rounded-xl text-center text-xl px-10 py-7 me-2 mb-2"
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
-                  onClick={handleStartRecording}
-                >
-                  <div className="flex flex-row justify-center align-items-center">
-                    {" "}
-                    <span className="text-xl mr-3">
-                      <AiFillAudio fontSize={28} />
-                    </span>
-                    Answer
-                  </div>
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  className="text-white bg-green-600 hover:bg-green-700 block font-medium rounded-xl text-center text-xl px-10 py-7 me-2 mb-2"
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
-                  onClick={handleStopRecording}
-                >
-                  <div className="flex flex-row justify-center align-items-center">
-                    {" "}
-                    <span className="text-xl mr-3">
-                      <AiFillAudio fontSize={28} />
-                    </span>
-                    Done
-                  </div>
-                </button>
-              )}
-              {isHovered && (
-                <div className="absolute bg-slate-700 text-white p-2 rounded-md mt-1">
-                  {isRecording ? "Stop Recording" : "Answer with your mic"}
-                </div>
-              )}
+      {loading && (
+        <div className="flex justify-center items-center w-full h-screen">
+        <img
+          className="object-cover pl-4 w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
+          src={Loader_gif}
+          alt=""
+        />
+      </div>
+      
+      )}
+      {!loading && (
+        <div className="w-7/12 h-fit mb-4 border mt-64 border-gray-200 rounded-3xl bg-white mx-auto shadow-2xl py-2">
+          <div className="px-5 py-5">
+            <div className="text-4xl p-5 leading-relaxed">
+              {questions[currentQuestionIndex]}
             </div>
 
-            <div>
-              <button
-                className="border border-blue-400 px-7 py-7 rounded-2xl mb-2 hover:bg-blue-50 mr-3 cursor-pointer"
-                onMouseEnter={handleMouseEnter1}
-                onMouseLeave={handleMouseLeave1}
-                onClick={handlePreviousQuestion}
-                disabled={currentQuestionIndex === 0}
-              >
-                <GrLinkPrevious size={20} color="blue" />
-              </button>
-              {isHovered1 && (
-                <div className="absolute bg-slate-700 text-white p-2 rounded-md mt-1">
-                  Previous Question
-                </div>
-              )}
+            <hr className="mt-10 -px-5 -py-5" />
 
-              {currentQuestionIndex === questions.length - 1 ? (
-                // If it's the last question, display Finish Interview message
-                <Link
-                  className="border border-blue-400 px-7 py-7 rounded-2xl mb-2 hover:bg-blue-50 cursor-pointer"
-                  onMouseEnter={handleMouseEnter2}
-                  onMouseLeave={handleMouseLeave2}
-                  onClick={handleNextQuestion}
-                  to="/Result"
-                >
-                  End
-                </Link>
-              ) : (
-                // Otherwise, display the Next button
+            <div className="flex flex-row mt-8 justify-between align-items-center">
+              <div>
+                {!isRecording ? (
+                  <button
+                    type="button"
+                    className="text-white bg-blue-600 hover:bg-blue-700 block font-medium rounded-xl text-center text-xl px-10 py-7 me-2 mb-2"
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                    onClick={handleStartRecording}
+                  >
+                    <div className="flex flex-row justify-center align-items-center">
+                      {" "}
+                      <span className="text-xl mr-3">
+                        <AiFillAudio fontSize={28} />
+                      </span>
+                      Answer
+                    </div>
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    className="text-white bg-green-600 hover:bg-green-700 block font-medium rounded-xl text-center text-xl px-10 py-7 me-2 mb-2"
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                    onClick={handleStopRecording}
+                  >
+                    <div className="flex flex-row justify-center align-items-center">
+                      {" "}
+                      <span className="text-xl mr-3">
+                        <AiFillAudio fontSize={28} />
+                      </span>
+                      Done
+                    </div>
+                  </button>
+                )}
+                {isHovered && (
+                  <div className="absolute bg-slate-700 text-white p-2 rounded-md mt-1">
+                    {isRecording ? "Stop Recording" : "Answer with your mic"}
+                  </div>
+                )}
+              </div>
+
+              <div>
                 <button
-                  className="border border-blue-400 px-7 py-7 rounded-2xl mb-2 hover:bg-blue-50 cursor-pointer"
-                  onMouseEnter={handleMouseEnter2}
-                  onMouseLeave={handleMouseLeave2}
-                  onClick={() => {
-                    handleNextQuestion();
-                  }}
+                  className="border border-blue-400 px-7 py-7 rounded-2xl mb-2 hover:bg-blue-50 mr-3 cursor-pointer"
+                  onMouseEnter={handleMouseEnter1}
+                  onMouseLeave={handleMouseLeave1}
+                  onClick={handlePreviousQuestion}
+                  disabled={currentQuestionIndex === 0}
                 >
-                  <GrLinkNext size={20} color="blue" />
+                  <GrLinkPrevious size={20} color="blue" />
                 </button>
-              )}
+                {isHovered1 && (
+                  <div className="absolute bg-slate-700 text-white p-2 rounded-md mt-1">
+                    Previous Question
+                  </div>
+                )}
 
-              {isHovered2 && (
-                <div className="absolute bg-slate-700 text-white p-2 rounded-md mt-1">
-                  {currentQuestionIndex === questions.length - 1
-                    ? "Finish Interview"
-                    : "Next Question"}
-                </div>
-              )}
+                {currentQuestionIndex === questions.length - 1 ? (
+                  // If it's the last question, display Finish Interview message
+                  <Link
+                    className="border border-blue-400 px-7 py-7 rounded-2xl mb-2 hover:bg-blue-50 cursor-pointer"
+                    onMouseEnter={handleMouseEnter2}
+                    onMouseLeave={handleMouseLeave2}
+                    onClick={handleNextQuestion}
+                    to="/Result"
+                  >
+                    End
+                  </Link>
+                ) : (
+                  // Otherwise, display the Next button
+                  <button
+                    className="border border-blue-400 px-7 py-7 rounded-2xl mb-2 hover:bg-blue-50 cursor-pointer"
+                    onMouseEnter={handleMouseEnter2}
+                    onMouseLeave={handleMouseLeave2}
+                    onClick={() => {
+                      handleNextQuestion();
+                    }}
+                  >
+                    <GrLinkNext size={20} color="blue" />
+                  </button>
+                )}
+
+                {isHovered2 && (
+                  <div className="absolute bg-slate-700 text-white p-2 rounded-md mt-1">
+                    {currentQuestionIndex === questions.length - 1
+                      ? "Finish Interview"
+                      : "Next Question"}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
       <AudioRecorder
         isRecording={isRecording}
         setIsRecording={setIsRecording}

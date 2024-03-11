@@ -38,30 +38,30 @@ const AudioRecorder = ({
       }
     };
 
-      mediaRecorder.onstop = () => {
-        const audioBlob = new Blob(audioChunk.current, { type: "audio/wav" });
-        const audioUrl = URL.createObjectURL(audioBlob);
-        setRecording(audioUrl);
-        onRecordingEnded(audioUrl);
-        setRecordedAudioBlob(audioBlob);
-        // console.log("Audio", audioBlob);
-      };
+    mediaRecorder.onstop = () => {
+      const audioBlob = new Blob(audioChunk.current, { type: "audio/wav" });
+      const audioUrl = URL.createObjectURL(audioBlob);
+      setRecording(audioUrl);
+      onRecordingEnded(audioUrl);
+      setRecordedAudioBlob(audioBlob);
+      // console.log("Audio", audioBlob);
+    };
 
     mediaRecorderRef.current = mediaRecorder;
     startTimeRef.current = Date.now();
     mediaRecorder.start();
 
-    setTimeout(() => {
-      if (
-        mediaRecorderRef.current &&
-        mediaRecorderRef.current.state === "recording"
-      ) {
-        alert("Hurry up! You have only 5 seconds remaining.");
-      }
-    }, timeLimit);
+    // setTimeout(() => {
+    //   if (
+    //     mediaRecorderRef.current &&
+    //     mediaRecorderRef.current.state === "recording"
+    //   ) {
+    //     alert("Hurry up! You have only 5 seconds remaining.");
+    //   }
+    // }, timeLimit);
 
     // Set timeout to stop recording after autoStopTime
-    setTimeout(stopRec, autoStopTime);
+    // setTimeout(stopRec, autoStopTime);
 
     // Set timeout to stop recording after autoStopTime
     // setTimeout(stopRec, autoStopTime - (Date.now() - startTimeRef.current)); // Adjusting timeout based on time elapsed
@@ -82,11 +82,7 @@ const AudioRecorder = ({
     }
   };
 
-  return (
-    <div>
-      <audio controls src={recording} />
-    </div>
-  );
+  return <div>{/* <audio controls src={recording} /> */}</div>;
 };
 
 export default AudioRecorder;
