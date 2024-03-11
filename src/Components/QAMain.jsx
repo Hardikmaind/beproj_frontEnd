@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import AudioRecorder from "./AudioRecorderMain";
 import AxiosInstance from "../api/AxiosInstance";
 import Loader_gif from "../assets/images/Loader_gif.gif";
+import { ImSpinner11 } from "react-icons/im";
 
 const QA = (data) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -145,7 +146,12 @@ const QA = (data) => {
                       <span className="text-xl mr-3">
                         <AiFillAudio fontSize={28} />
                       </span>
+                      <div className="flex  items-center gap-2">
+
                       Done
+                      <ImSpinner11 className="animate-spin" />
+                      </div>
+
                     </div>
                   </button>
                 )}
