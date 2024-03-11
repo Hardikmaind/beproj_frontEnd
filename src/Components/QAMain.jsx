@@ -4,7 +4,7 @@ import { GrLinkNext } from "react-icons/gr";
 import { GrLinkPrevious } from "react-icons/gr";
 import { Link } from "react-router-dom";
 import AudioRecorder from "./AudioRecorderMain";
-import axios from "axios";
+import AxiosInstance from "../api/AxiosInstance";
 
 const QA = (data) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -20,8 +20,8 @@ const QA = (data) => {
     formData.append("audio", recordedAudioBlob, "audio.wav");
 
     try {
-      const response = await axios.post(
-        "http://127.0.0.1:8000/api/upload_audio/",
+      const response = await AxiosInstance.post(
+        "upload_audio/",
         formData,
         {
           headers: {
