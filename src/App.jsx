@@ -11,7 +11,7 @@ import { useAuth } from "./context/AuthContext"; // Assuming you have an AuthCon
 import Techincal from "./pages/Interview/Technical";
 import HR from "./pages/Interview/HR";
 import Result from "./pages/Result";
-import AudioRecorder from "./Components/AudioRecorder";
+import AudioRecorder from "./Components/AudioRecorderMain";
 
 
 function App() {
