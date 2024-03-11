@@ -254,7 +254,7 @@ const AfterloginDashboard = () => {
         Choose Interview Type
       </div>
       <div className="mt-56 flex justify-center">
-        <Link className="mx-16" to="/Technical-Interview" onClick={()=>fetchquestions()}>
+        <Link className="mx-16" to="/Technical-Interview" >
           <Card
             Type="Technical"
             detail="Master the code, ace the interview. Elevate your technical skills with our innovative approach to technical interviews. From coding challenges to algorithmic prowess, we prepare you for success. Crack the code, secure the job!"

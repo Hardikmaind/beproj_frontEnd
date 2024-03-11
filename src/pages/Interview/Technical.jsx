@@ -13,13 +13,12 @@ const Technical = () => {
 
   console.log("Quesstions", data, loading, error);
   return (
-    <>
-      <div className="  ">
-        <h6 className="text-5xl">Technical Interview</h6>
-        <QAMain data={data} />
-  
-      </div>
-    </>
+    <div className=" flex-col  ">
+      <h6 className="text-5xl relative  top-5   flex justify-center items-center  w-full">
+        Technical Interview
+      </h6>
+      <QAMain data={data} />
+    </div>
   );
 };
 
