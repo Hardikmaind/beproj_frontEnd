@@ -83,6 +83,7 @@ const QA = (data) => {
       setCurrentQuestionIndex((prevIndex) =>
         prevIndex === questions.length - 1 ? 0 : prevIndex + 1
       );
+    setRecordedAudioBlob(null);
   };
 
   const handlePreviousQuestion = () => {
@@ -95,13 +96,12 @@ const QA = (data) => {
     <>
       {loading && (
         <div className="flex justify-center items-center w-full h-screen">
-        <img
-          className="object-cover pl-4 w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
-          src={Loader_gif}
-          alt=""
-        />
-      </div>
-      
+          <img
+            className="object-cover pl-4 w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
+            src={Loader_gif}
+            alt=""
+          />
+        </div>
       )}
       {!loading && (
         <div className="w-7/12 h-fit mb-4 border mt-64 border-gray-200 rounded-3xl bg-white mx-auto shadow-2xl py-2">
@@ -183,16 +183,31 @@ const QA = (data) => {
                   </Link>
                 ) : (
                   // Otherwise, display the Next button
-                  <button
-                    className="border border-blue-400 px-7 py-7 rounded-2xl mb-2 hover:bg-blue-50 cursor-pointer"
-                    onMouseEnter={handleMouseEnter2}
-                    onMouseLeave={handleMouseLeave2}
-                    onClick={() => {
-                      handleNextQuestion();
-                    }}
-                  >
-                    <GrLinkNext size={20} color="blue" />
-                  </button>
+                  <>
+                    {recordedAudioBlob !== null ? (
+                      <button
+                        className="border border-blue-400 px-7 py-7 rounded-2xl mb-2 hover:bg-blue-50 cursor-pointer"
+                        onMouseEnter={handleMouseEnter2}
+                        onMouseLeave={handleMouseLeave2}
+                        onClick={() => {
+                          handleNextQuestion();
+                        }}
+                      >
+                        <GrLinkNext size={20} color="blue" />
+                      </button>
+                    ) : (
+                      <button
+                        className="border border-blue-400 px-7 py-7 rounded-2xl mb-2 hover:bg-blue-50 cursor-pointer"
+                        onMouseEnter={handleMouseEnter2}
+                        onMouseLeave={handleMouseLeave2}
+                        onClick={() => {
+                          alert("Please record your answer first");
+                        }}
+                      >
+                        <GrLinkNext size={20} color="blue" />
+                      </button>
+                    )}
+                  </>
                 )}
 
                 {isHovered2 && (
