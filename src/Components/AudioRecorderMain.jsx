@@ -5,6 +5,7 @@ const AudioRecorder = ({
   setIsRecording,
   onStopRecording,
   onRecordingEnded,
+  setRecordedAudioBlob,
 }) => {
   const audioChunk = useRef([]);
   const [recording, setRecording] = useState(null);
@@ -40,7 +41,8 @@ const AudioRecorder = ({
         const audioUrl = URL.createObjectURL(audioBlob);
         setRecording(audioUrl);
         onRecordingEnded(audioUrl);
-        console.log("Audio", audioBlob);
+        setRecordedAudioBlob(audioBlob);
+        // console.log("Audio", audioBlob);
       };
 
       mediaRecorderRef.current = mediaRecorder;

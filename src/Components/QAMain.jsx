@@ -4,6 +4,7 @@ import { GrLinkNext } from "react-icons/gr";
 import { GrLinkPrevious } from "react-icons/gr";
 import { Link } from "react-router-dom";
 import AudioRecorder from "./AudioRecorderMain";
+import axios from "axios";
 
 const QA = (data) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -11,7 +12,29 @@ const QA = (data) => {
   const [isHovered2, setIsHovered2] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
   const [recordingUrl, setRecordingUrl] = useState(null);
+  const [recordedAudioBlob, setRecordedAudioBlob] = useState(null);
+  console.log(recordedAudioBlob);
   // const [recordingStopped, setRecordingStopped] = useState(false);
+  const handleUpload = async (recordedAudioBlob) => {
+    const formData = new FormData();
+    formData.append("audio", recordedAudioBlob, "audio.wav");
+
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/upload_audio/",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      console.log("Audio uploaded successfully:", response.data);
+    } catch (error) {
+      console.error("Error during audio upload:", error);
+    }
+  };
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -55,10 +78,11 @@ const QA = (data) => {
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
-  const handleNextQuestion = () => {
-    setCurrentQuestionIndex((prevIndex) =>
-      prevIndex === questions.length - 1 ? 0 : prevIndex + 1
-    );
+  const handleNextQuestion = async () => {
+    await handleUpload(recordedAudioBlob),
+      setCurrentQuestionIndex((prevIndex) =>
+        prevIndex === questions.length - 1 ? 0 : prevIndex + 1
+      );
   };
 
   const handlePreviousQuestion = () => {
@@ -152,7 +176,9 @@ const QA = (data) => {
                   className="border border-blue-400 px-7 py-7 rounded-2xl mb-2 hover:bg-blue-50 cursor-pointer"
                   onMouseEnter={handleMouseEnter2}
                   onMouseLeave={handleMouseLeave2}
-                  onClick={handleNextQuestion}
+                  onClick={() => {
+                    handleNextQuestion();
+                  }}
                 >
                   <GrLinkNext size={20} color="blue" />
                 </button>
@@ -174,6 +200,7 @@ const QA = (data) => {
         setIsRecording={setIsRecording}
         onStopRecording={handleStopRecording}
         onRecordingEnded={handleRecordingEnded}
+        setRecordedAudioBlob={setRecordedAudioBlob}
         // setRecordingStopped={setRecordingStopped}
       />
     </>
