@@ -7,7 +7,7 @@ const HR = () => {
   return (
     <div className="bg-gray-100 ">
       <h6 className="text-5xl">HR Interview</h6>
-      <QA />
+      <QA data={data} />
     </div>
   );
 };
