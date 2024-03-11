@@ -1,5 +1,5 @@
 import React from "react";
-import QA from "../../Components/QAMain";
+import QAMain from "../../Components/QAMain";
 import useFetch from "../../hooks/useFetch";
 
 const Technical = () => {
@@ -16,7 +16,7 @@ const Technical = () => {
     <>
       <div className="  ">
         <h6 className="text-5xl">Technical Interview</h6>
-        <QA data={data} />
+        <QAMain data={data} />
   
       </div>
     </>

@@ -95,18 +95,20 @@ const QA = (data) => {
   return (
     <>
       {loading && (
-        <div className="flex justify-center items-center w-full h-screen">
+        <div className="flex justify-center items-center w-full mt-64">
           <img
             className="object-cover pl-4 w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
             src={Loader_gif}
             alt=""
           />
+          <span className="text-3xl font-bold text-blue-600">Wait your answer is processing</span>
         </div>
       )}
       {!loading && (
-        <div className="w-7/12 h-fit mb-4 border mt-64 border-gray-200 rounded-3xl bg-white mx-auto shadow-2xl py-2">
-          <div className="px-5 py-5">
-            <div className="text-4xl p-5 leading-relaxed">
+        
+        <div className="w-7/12 h-fit mb-4 border mt-52 border-gray-200 rounded-3xl bg-white mx-auto shadow-2xl py-2">
+          <div className="px-5 py-3">
+            <div className="text-3xl p-5 leading-relaxed">
               {questions[currentQuestionIndex]}
             </div>
 

@@ -1,5 +1,5 @@
 import React from "react";
-import QA from "../../Components/QAMain";
+import QAMain from "../../Components/QAMain";
 import useFetch from "../../hooks/useFetch";
 
 const HR = () => {
@@ -13,9 +13,9 @@ const HR = () => {
 
   console.log("Quesstions", data, loading, error);
   return (
-    <div className="bg-gray-100 ">
+    <div className=" ">
       <h6 className="text-5xl">HR Interview</h6>
-      <QA data={data} />
+      <QAMain data={data} />
     </div>
   );
 };
