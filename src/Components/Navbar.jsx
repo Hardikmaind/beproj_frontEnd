@@ -1,8 +1,7 @@
 import React from "react";
 import { getAuth, signOut } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-
 
 const Navbar = () => {
   const auth = getAuth();
@@ -13,16 +12,18 @@ const Navbar = () => {
     await auth.signOut();
     navigate("/");
     // Redirect to home page or display sign-out message
-    console.log("you have been signed out")
+    console.log("you have been signed out");
   };
   return (
     <div>
       <nav className="bg-blue-500 px-3 py-2">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
           <a href="#" className="flex items-center space-x-3">
-            <span className="text-2xl font-semibold text-white">
-              Audio Confidence Estimation
-            </span>
+            <Link to="/">
+              <span className="text-2xl font-semibold text-white">
+                Audio Confidence Estimation
+              </span>
+            </Link>
           </a>
           <button
             type="button"
@@ -70,7 +71,9 @@ const Navbar = () => {
                   href="#"
                   className="block p-9 md:p-0 text-white rounded  md:hover:text-gray-950 md:dark:hover:bg-transparent transition-all duration-300 hover:text-black hover:bg-gray-700 "
                 >
-                  <div className="py-2 px-6">Welcome {userData && userData.user_name}</div>
+                  <div className="py-2 px-6">
+                    Welcome {userData && userData.user_name}
+                  </div>
                 </div>
               </li>
               <li>
