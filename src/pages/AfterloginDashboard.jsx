@@ -213,13 +213,11 @@ const AfterloginDashboard = () => {
     setModalVisible(false);
   };
 
-  const openInterviewModal = () => {
-    setInterviewModalVisible(true);
+  const toggleInterviewModal = () => {
+    setInterviewModalVisible(!interviewModalVisible);
   };
 
-  const closeInterviewModal = () => {
-    setInterviewModalVisible(false);
-  };
+ 
 
   return (
     <>
@@ -242,27 +240,33 @@ const AfterloginDashboard = () => {
       </div> */}
       <div className="ml-80 mr-80">
         <div className="flex justify-between">
-          <div className="flex mt-8 text-7xl">Hey Adii!</div>
+          <div className="flex mt-8 text-7xl">
+            Welcome {userData && userData.user_name} !!!
+          </div>
           <div
             className="mt-8 text-3xl px-16 border-2 border-blue-950 rounded-full w-64 h-64 flex items-center justify-center align-middle bg-blue-800 cursor-pointer"
-            onClick={openInterviewModal}
+            onClick={toggleInterviewModal}
           >
             <span className="block text-center text-white">
               Start Interview
             </span>
           </div>
         </div>
-        <div className="text-4xl mt-8">Previous Feedbacks</div>
+        <div className="text-4xl mt-8">Previous Interviews</div>
         <div className="flex flex-row justify-between mt-12">
           <FeedbackCard />
           <FeedbackCard />
           <FeedbackCard />
         </div>
       </div>
-      {/* <InterViewModal
-        visible={interviewModalVisible}
-        closeModal={closeInterviewModal}
-      /> */}
+      {interviewModalVisible ? (
+        <InterViewModal
+          onClick={toggleInterviewModal}
+          visible={interviewModalVisible}
+          toggleInterviewModal={toggleInterviewModal}
+        />
+      ) : null
+}
       {!is_registered ? <FormModal closeModal={closeModal} /> : null}
     </>
   );
