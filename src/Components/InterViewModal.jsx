@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import AxiosInstance from "../api/AxiosInstance";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+
+
+
 const InterViewModal = ({ toggleInterviewModal }) => {
   const { currentUser, setUserData, userData } = useAuth();
   console.log(currentUser.uid);
@@ -26,6 +30,30 @@ const InterViewModal = ({ toggleInterviewModal }) => {
       console.log(error);
     }
   };
+
+
+   // Close modal when clicking outside or pressing Escape key
+   useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (e.target.classList.contains("fixed")) {
+        toggleInterviewModal();
+      }
+    };
+
+    const handleEscapeKey = (e) => {
+      if (e.key === "Escape") {
+        toggleInterviewModal();
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("keydown", handleEscapeKey);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, [toggleInterviewModal]);
 
   return (
     <div className="fixed inset-0 bg-gray-900 bg-opacity-5 backdrop-blur-md flex justify-center items-center">
