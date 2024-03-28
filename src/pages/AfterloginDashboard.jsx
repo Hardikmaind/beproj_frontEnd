@@ -29,7 +29,6 @@
 //         setIs_regestered(res.data.is_regestered);
 //         console.log(is_regestered)
 
-
 //         console.log("API call success", res.data);
 //         // Handle the response as needed
 //       } catch (error) {
@@ -68,23 +67,12 @@
 //       </div>
 //       {/* <span  className="text-4xl"></span> */}
 //       {!is_regestered?<FormModal />:null}
-      
+
 //     </>
 //   );
 // };
 
 // export default AfterloginDashboard;
-
-
-
-
-
-
-
-
-
-
-
 
 // import React, { useEffect, useState } from "react";
 // import { Link } from "react-router-dom";
@@ -106,7 +94,7 @@
 //           console.error("Current user not available");
 //           return;
 //         }
-  
+
 //         const idToken = await currentUser.getIdToken();
 
 //         const res = await Axios.get("http://127.0.0.1:8000/api/create_user/", {
@@ -162,31 +150,6 @@
 
 // export default AfterloginDashboard;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Card from "../Components/card";
@@ -195,13 +158,15 @@ import { useAuth } from "../context/AuthContext";
 import useFetch from "../hooks/useFetch";
 // import  Axios  from "axios";
 import AxiosInstance from "../api/AxiosInstance";
+import FeedbackCard from "../Components/FeedbackCard";
+import InterViewModal from "../Components/InterViewModal";
 
 const AfterloginDashboard = () => {
-  const { currentUser ,setUserData ,userData} = useAuth();
+  const { currentUser, setUserData, userData } = useAuth();
   const [is_registered, setIs_registered] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [interviewModalVisible, setInterviewModalVisible] = useState(false);
   const fetchquestions = () => {
-
     const { data, loading, error } = useFetch("tech_questions/");
   };
 
@@ -213,7 +178,7 @@ const AfterloginDashboard = () => {
           // console.error("Current user not available");
           return;
         }
-  
+
         const idToken = await currentUser.getIdToken();
 
         const res = await AxiosInstance.get("create_user/", {
@@ -225,9 +190,9 @@ const AfterloginDashboard = () => {
         setIs_registered(res.data.user.is_registered);
         setUserData({
           ...userData,
-          user_name:res.data.user.user_name,
+          user_name: res.data.user.user_name,
         });
-        console.log(userData)
+        console.log(userData);
         console.log(is_registered);
 
         // If user is not registered, show the modal
@@ -248,9 +213,17 @@ const AfterloginDashboard = () => {
     setModalVisible(false);
   };
 
+  const openInterviewModal = () => {
+    setInterviewModalVisible(true);
+  };
+
+  const closeInterviewModal = () => {
+    setInterviewModalVisible(false);
+  };
+
   return (
     <>
-      <div className="flex mt-4 mx-auto text-6xl justify-center">
+      {/* <div className="flex mt-4 mx-auto text-6xl justify-center">
         Choose Interview Type
       </div>
       <div className="mt-56 flex justify-center">
@@ -266,8 +239,31 @@ const AfterloginDashboard = () => {
             detail="Unlock career opportunities with our HR interview preparation. Develop polished communication, interpersonal skills, and handle real-world scenarios with confidence. Elevate your professional presence and land your dream job with our comprehensive HR interview training."
           />
         </Link>
+      </div> */}
+      <div className="ml-80 mr-80">
+        <div className="flex justify-between">
+          <div className="flex mt-8 text-7xl">Hey Adii!</div>
+          <div
+            className="mt-8 text-3xl px-16 border-2 border-blue-950 rounded-full w-64 h-64 flex items-center justify-center align-middle bg-blue-800 cursor-pointer"
+            onClick={openInterviewModal}
+          >
+            <span className="block text-center text-white">
+              Start Interview
+            </span>
+          </div>
+        </div>
+        <div className="text-4xl mt-8">Previous Feedbacks</div>
+        <div className="flex flex-row justify-between mt-12">
+          <FeedbackCard />
+          <FeedbackCard />
+          <FeedbackCard />
+        </div>
       </div>
-      { !is_registered ? (<FormModal closeModal={closeModal} />) : null}
+      {/* <InterViewModal
+        visible={interviewModalVisible}
+        closeModal={closeInterviewModal}
+      /> */}
+      {!is_registered ? <FormModal closeModal={closeModal} /> : null}
     </>
   );
 };
