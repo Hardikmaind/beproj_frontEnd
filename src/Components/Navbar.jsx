@@ -16,15 +16,15 @@ const Navbar = () => {
   };
   return (
     <div>
-      <nav className="bg-blue-500 px-3 py-2">
+      <nav className="bg-blue-800 px-3 py-6">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
-          <a href="#" className="flex items-center space-x-3">
-            <Link to="/">
-              <span className="text-2xl font-semibold text-white">
-                Audio Confidence Estimation
-              </span>
-            </Link>
-          </a>
+          {/* <a href="#" className="flex items-center space-x-3"> */}
+          <Link to="/">
+            <span className="text-4xl font-semibold text-white ">
+              AcousticSure
+            </span>
+          </Link>
+          {/* </a> */}
           <button
             type="button"
             className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-red-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
