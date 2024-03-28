@@ -188,6 +188,7 @@ const AfterloginDashboard = () => {
         });
 
         setIs_registered(res.data.user.is_registered);
+        await localStorage.setItem("is_registered", res.data.user.is_registered);
         setUserData({
           ...userData,
           user_name: res.data.user.user_name,
@@ -199,6 +200,8 @@ const AfterloginDashboard = () => {
         if (!is_registered) {
           setModalVisible(true);
         }
+
+        localStorage.setItem("user_name", res.data.user.user_name);
 
         // console.log("API call success", res.data);
       } catch (error) {
@@ -267,7 +270,7 @@ const AfterloginDashboard = () => {
         />
       ) : null
 }
-      {!is_registered ? <FormModal closeModal={closeModal} /> : null}
+      {!localStorage.getItem("is_registered")   ? <FormModal closeModal={closeModal} /> : null}
     </>
   );
 };

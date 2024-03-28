@@ -17,7 +17,8 @@ const Login = ({ showLogin, setShowLogin }) => {
     e.preventDefault();
 
     try {
-      await auth.logIn(email, password); // Use signIn function from the context
+      const res=await auth.logIn(email, password); // Use signIn function from the context
+      console.log(res)
       console.log("Logged in");
       navigate("/", { replace: true }); // Redirect to the protected route
     } catch (error) {

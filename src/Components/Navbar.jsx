@@ -9,6 +9,9 @@ const Navbar = () => {
   const { userData } = useAuth();
 
   const handleSignOut = async () => {
+    localStorage.removeItem('is_registered');
+    localStorage.removeItem('user');
+    localStorage.clear();
     await auth.signOut();
     navigate("/");
     // Redirect to home page or display sign-out message
