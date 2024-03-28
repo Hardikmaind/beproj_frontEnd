@@ -49,11 +49,8 @@ const InterViewModal = ({ toggleInterviewModal }) => {
     document.addEventListener("mousedown", handleOutsideClick);
     document.addEventListener("keydown", handleEscapeKey);
 
-    return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
-      document.removeEventListener("keydown", handleEscapeKey);
-    };
-  }, [toggleInterviewModal]);
+    
+  }, [toggleInterviewModal, ]);
 
   return (
     <div className="fixed inset-0 bg-gray-900 bg-opacity-5 backdrop-blur-md flex justify-center items-center">
