@@ -5,16 +5,12 @@ import AxiosInstance from "../api/AxiosInstance";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
-
-
 const InterViewModal = ({ toggleInterviewModal }) => {
   const { currentUser, setUserData, userData } = useAuth();
   console.log(currentUser.uid);
-
+  
 
   const navigate = useNavigate();
-
-
 
   const createInterviewId = async (argument) => {
     try {
@@ -22,18 +18,20 @@ const InterViewModal = ({ toggleInterviewModal }) => {
         user_id: currentUser.uid,
         interview_type: argument,
       });
-      
 
-
-      
+      if (argument === "Technical") {
+        navigate("/Technical-Interview");
+      }
+      if (argument === "HR") {
+        navigate("/HR-Interview");
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
-
-   // Close modal when clicking outside or pressing Escape key
-   useEffect(() => {
+  // Close modal when clicking outside or pressing Escape key
+  useEffect(() => {
     const handleOutsideClick = (e) => {
       if (e.target.classList.contains("fixed")) {
         toggleInterviewModal();
@@ -48,9 +46,7 @@ const InterViewModal = ({ toggleInterviewModal }) => {
 
     document.addEventListener("mousedown", handleOutsideClick);
     document.addEventListener("keydown", handleEscapeKey);
-
-    
-  }, [toggleInterviewModal, ]);
+  }, [toggleInterviewModal]);
 
   return (
     <div className="fixed inset-0 bg-gray-900 bg-opacity-5 backdrop-blur-md flex justify-center items-center">
@@ -98,7 +94,10 @@ const InterViewModal = ({ toggleInterviewModal }) => {
                 required
               />
               <div
-                onClick={ async() =>  { await createInterviewId("Technical"), navigate("/Technical-Interview")}}
+                onClick={() => {
+                  createInterviewId("Technical");
+                  // navigate("/Technical-Interview");
+                }}
                 htmlFor="job-1"
                 className="inline-flex items-center justify-between w-full p-5 text-gray-900 bg-white border border-gray-200 rounded-lg cursor-pointer"
               >
@@ -136,7 +135,9 @@ const InterViewModal = ({ toggleInterviewModal }) => {
                 className="hidden peer"
               />
               <div
-                onClick={async() => {await createInterviewId("HR"), navigate("/HR-Interview")}}
+                onClick={() => {
+                  createInterviewId("HR");
+                }}
                 htmlFor="job-2"
                 className="inline-flex items-center justify-between w-full p-5 text-gray-900 bg-white border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100"
               >
