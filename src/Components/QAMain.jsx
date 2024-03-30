@@ -148,7 +148,7 @@ const QA = (data) => {
                         <AiFillAudio fontSize={28} />
                       </span>
                       <div className="flex  items-center gap-2">
-                        Done
+                        Recording
                         <ImSpinner11 className="animate-spin" />
                       </div>
                     </div>
