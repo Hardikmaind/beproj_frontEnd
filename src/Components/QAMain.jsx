@@ -102,11 +102,12 @@ const QA = (data) => {
             src={Loader_gif}
             alt=""
           />
-          <span className="text-3xl font-bold text-blue-600">Wait your answer is processing</span>
+          <span className="text-3xl font-bold text-blue-800">
+            Wait your answer is processing
+          </span>
         </div>
       )}
       {!loading && (
-        
         <div className="w-7/12 h-fit mb-4 border mt-52 border-gray-200 rounded-3xl bg-white mx-auto shadow-2xl py-2">
           <div className="px-5 py-3">
             <div className="text-3xl p-5 leading-relaxed">
@@ -147,11 +148,9 @@ const QA = (data) => {
                         <AiFillAudio fontSize={28} />
                       </span>
                       <div className="flex  items-center gap-2">
-
-                      Done
-                      <ImSpinner11 className="animate-spin" />
+                        Done
+                        <ImSpinner11 className="animate-spin" />
                       </div>
-
                     </div>
                   </button>
                 )}

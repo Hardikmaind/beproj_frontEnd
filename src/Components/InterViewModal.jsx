@@ -52,7 +52,7 @@ const InterViewModal = ({ toggleInterviewModal }) => {
     <div className="fixed inset-0 bg-gray-900 bg-opacity-5 backdrop-blur-md flex justify-center items-center">
       <div
         tabIndex="-1"
-        className="overflow-auto z-50 bg-green-800 rounded-lg shadow-lg p-2 w-full max-w-md"
+        className="overflow-auto z-50 bg-blue-800 rounded-lg shadow-lg p-2 w-full max-w-md"
       >
         <div className="md:p-5">
           {/* Modal content */}
