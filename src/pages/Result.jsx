@@ -50,7 +50,7 @@ const Result = () => {
             onClick={toggleQAModal}
          
           >
-            Question and Answer
+            Click Here to see Detailed Analysis
           </button>
           
         </div>
