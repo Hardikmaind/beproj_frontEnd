@@ -114,7 +114,12 @@ const sendQuestions = async () => {
   
   if(desiredPart==="Technical-Interview"){
     try {
-      const res = await AxiosInstance.post("send_ques/", {questions:data.data});
+      const postData={
+        quesiton:data.data
+      }
+     
+      console.log("my name is haridk",postData)
+      const res = await AxiosInstance.post("send_ques/", postData.quesiton);
       console.log("question submitted successfully")
     } catch (error) {
       console.error("Error sending questions:", error);
@@ -218,7 +223,7 @@ const sendQuestions = async () => {
                     className="border border-blue-400 px-7 py-7 rounded-2xl mb-2 hover:bg-blue-50 cursor-pointer"
                     onMouseEnter={handleMouseEnter2}
                     onMouseLeave={handleMouseLeave2}
-                    onClick={()=>(handleNextQuestion,sendQuestions())}
+                    onClick={()=>(handleNextQuestion(), sendQuestions())}
                     to="/Result"
                   >
                     End
