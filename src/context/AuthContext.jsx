@@ -1,10 +1,4 @@
 
-
-
-
-
-
-
 // AuthContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { auth } from '../../firebase';
@@ -22,6 +16,7 @@ export const AuthProvider = ({ children }) => {
     user_name:"",
   });
   // const[modalOn, ]
+
 
   const signUp = (email, password) => {
     return createUserWithEmailAndPassword(auth,email, password);

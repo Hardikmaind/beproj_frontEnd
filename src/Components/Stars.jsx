@@ -17,11 +17,7 @@ const Stars = ({ stars }) => {
     );
   });
 
-  return (
-    // <Wrapper>
-    <div className="flex flex-row gap-2 mt-1">{ratingStar}</div>
-    // </Wrapper>
-  );
+  return <div className="flex flex-row gap-2 mt-1">{ratingStar}</div>;
 };
 
 export default Stars;

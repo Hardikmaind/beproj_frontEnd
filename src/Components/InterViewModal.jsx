@@ -7,9 +7,13 @@ import { useEffect } from "react";
 
 
 const InterViewModal = ({ toggleInterviewModal }) => {
-  const { currentUser, setUserData, userData } = useAuth();
+  const {
+    currentUser,
+    setUserData,
+    userData,
+
+  } = useAuth();
   console.log(currentUser.uid);
-  
 
 
   const navigate = useNavigate();
