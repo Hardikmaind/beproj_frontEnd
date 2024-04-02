@@ -188,7 +188,10 @@ const AfterloginDashboard = () => {
         });
 
         setIs_registered(res.data.user.is_registered);
-        await localStorage.setItem("is_registered", res.data.user.is_registered);
+        await localStorage.setItem(
+          "is_registered",
+          res.data.user.is_registered
+        );
         setUserData({
           ...userData,
           user_name: res.data.user.user_name,
@@ -219,8 +222,6 @@ const AfterloginDashboard = () => {
   const toggleInterviewModal = () => {
     setInterviewModalVisible(!interviewModalVisible);
   };
-
- 
 
   return (
     <>
@@ -255,11 +256,29 @@ const AfterloginDashboard = () => {
             </span>
           </div>
         </div>
-        <div className="text-4xl mt-8">Previous Interviews</div>
+        <div className="text-4xl mt-8">Previous Feedbacks</div>
         <div className="flex flex-row justify-between mt-12">
-          <FeedbackCard />
-          <FeedbackCard />
-          <FeedbackCard />
+          <FeedbackCard
+            stars={5}
+            Grammer={"Good"}
+            Accuracy={"Decent"}
+            IID={1}
+            IType={"Technical"}
+          />
+          <FeedbackCard
+            stars={3.9}
+            Grammer={"Good"}
+            Accuracy={"Great"}
+            IID={2}
+            IType={"HR"}
+          />
+          <FeedbackCard
+            stars={2}
+            Grammer={"Bad"}
+            Accuracy={"Bad"}
+            IID={3}
+            IType={"Technical"}
+          />
         </div>
       </div>
       {interviewModalVisible ? (
@@ -268,9 +287,10 @@ const AfterloginDashboard = () => {
           visible={interviewModalVisible}
           toggleInterviewModal={toggleInterviewModal}
         />
-      ) : null
-}
-      {!localStorage.getItem("is_registered")   ? <FormModal closeModal={closeModal} /> : null}
+      ) : null}
+      {!localStorage.getItem("is_registered") ? (
+        <FormModal closeModal={closeModal} />
+      ) : null}
     </>
   );
 };
