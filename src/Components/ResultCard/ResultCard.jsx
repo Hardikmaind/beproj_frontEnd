@@ -10,7 +10,7 @@ function ResultCard() {
   return (
     <div
       href="#"
-      className="mx-auto w-6/12 px-6 py-6 items-center bg-white border border-gray-500 rounded-lg shadow md:flex-row "
+      className="mx-auto w-6/12 px-6 py-6 items-center bg-white border border-gray-500 rounded-lg shadow  "
       // hover:bg-gray-100
     >
       <div className="flex flex-row gap-6">
