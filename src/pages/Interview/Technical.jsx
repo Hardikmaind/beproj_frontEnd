@@ -18,6 +18,7 @@ const Technical = () => {
         Technical Interview
       </h6>
       <QAMain data={data} />
+      
     </div>
   );
 };

@@ -2,12 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 import { AiFillAudio } from "react-icons/ai";
 import { GrLinkNext } from "react-icons/gr";
 import { GrLinkPrevious } from "react-icons/gr";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import AudioRecorder from "./AudioRecorderMain";
 import AxiosInstance from "../api/AxiosInstance";
 import Loader_gif from "../assets/images/Loader_gif.gif";
 import { ImSpinner11 } from "react-icons/im";
-
+import { useNavigate } from "react-router-dom";
 
 const QA = (data) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -38,8 +38,7 @@ const QA = (data) => {
     }
   };
 
-
-
+  const navigate = useNavigate();
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -97,41 +96,29 @@ const QA = (data) => {
     );
   };
 
-
-
-
-
-  
   const pathName = window.location.pathname;
   // console.log(pathName); // Output: /Technical-Interview
   // Extract the desired part from the path name
-  const desiredPart = pathName.split('/').filter(part => part.trim() !== '')[0];
-  console.log("hello world ",desiredPart); // Output: Technical-Interview
+  const desiredPart = pathName
+    .split("/")
+    .filter((part) => part.trim() !== "")[0];
+  console.log("hello world ", desiredPart); // Output: Technical-Interview
 
+  const sendQuestions = async () => {
+    if (desiredPart === "Technical-Interview") {
+      try {
+        const postData = {
+          quesiton: data.data,
+        };
 
-
-const sendQuestions = async () => {
-  
-  if(desiredPart==="Technical-Interview"){
-    try {
-      const postData={
-        quesiton:data.data
+        console.log("my name is haridk", postData);
+        const res = await AxiosInstance.post("send_ques/", postData.quesiton);
+        console.log("question submitted successfully");
+      } catch (error) {
+        console.error("Error sending questions:", error);
       }
-     
-      console.log("my name is haridk",postData)
-      const res = await AxiosInstance.post("send_ques/", postData.quesiton);
-      console.log("question submitted successfully")
-    } catch (error) {
-      console.error("Error sending questions:", error);
-      
     }
-
-  }
-  
-}
-
-
-
+  };
 
   return (
     <>
@@ -148,126 +135,137 @@ const sendQuestions = async () => {
         </div>
       )}
       {!loading && (
-        <div className="w-7/12 h-fit mb-4 border mt-52 border-gray-200 rounded-3xl bg-white mx-auto shadow-2xl py-2">
-          <div className="px-5 py-3">
-            <div className="text-3xl p-5 leading-relaxed">
-              {questions[currentQuestionIndex]}
-            </div>
-
-            <hr className="mt-10 -px-5 -py-5" />
-
-            <div className="flex flex-row mt-8 justify-between align-items-center">
-              <div>
-                {!isRecording ? (
-                  <button
-                    type="button"
-                    className="text-white bg-blue-600 hover:bg-blue-700 block font-medium rounded-xl text-center text-xl px-10 py-7 me-2 mb-2"
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
-                    onClick={handleStartRecording}
-                  >
-                    <div className="flex flex-row justify-center align-items-center">
-                      {" "}
-                      <span className="text-xl mr-3">
-                        <AiFillAudio fontSize={28} />
-                      </span>
-                      Answer
-                    </div>
-                  </button>
-                ) : (
-                  <button
-                    type="button"
-                    className="text-white bg-green-600 hover:bg-green-700 block font-medium rounded-xl text-center text-xl px-10 py-7 me-2 mb-2"
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
-                    onClick={handleStopRecording}
-                  >
-                    <div className="flex flex-row justify-center align-items-center">
-                      {" "}
-                      <span className="text-xl mr-3">
-                        <AiFillAudio fontSize={28} />
-                      </span>
-                      <div className="flex  items-center gap-2">
-                        Recording
-                        <ImSpinner11 className="animate-spin" />
-                      </div>
-                    </div>
-                  </button>
-                )}
-                {isHovered && (
-                  <div className="absolute bg-slate-700 text-white p-2 rounded-md mt-1">
-                    {isRecording ? "Stop Recording" : "Answer with your mic"}
-                  </div>
-                )}
+        <>
+          <div className="w-7/12 h-fit mb-4 border mt-52 border-gray-200 rounded-3xl bg-white mx-auto shadow-2xl py-2">
+            <div className="px-5 py-3">
+              <div className="text-3xl p-5 leading-relaxed">
+                {questions[currentQuestionIndex]}
               </div>
 
-              <div>
-                <button
-                  className="border border-blue-400 px-7 py-7 rounded-2xl mb-2 hover:bg-blue-50 mr-3 cursor-pointer"
-                  onMouseEnter={handleMouseEnter1}
-                  onMouseLeave={handleMouseLeave1}
-                  onClick={handlePreviousQuestion}
-                  disabled={currentQuestionIndex === 0}
-                >
-                  <GrLinkPrevious size={20} color="blue" />
-                </button>
-                {isHovered1 && (
-                  <div className="absolute bg-slate-700 text-white p-2 rounded-md mt-1">
-                    Previous Question
-                  </div>
-                )}
+              <hr className="mt-10 -px-5 -py-5" />
 
-                {currentQuestionIndex === questions.length - 1 ? (
-                  // If it's the last question, display Finish Interview message
-                  <Link
-                    className="border border-blue-400 px-7 py-7 rounded-2xl mb-2 hover:bg-blue-50 cursor-pointer"
-                    onMouseEnter={handleMouseEnter2}
-                    onMouseLeave={handleMouseLeave2}
-                    onClick={()=>(handleNextQuestion(), sendQuestions())}
-                    to="/Result"
+              <div className="flex flex-row mt-8 justify-between align-items-center">
+                <div>
+                  {!isRecording ? (
+                    <button
+                      type="button"
+                      className="text-white bg-blue-600 hover:bg-blue-700 block font-medium rounded-xl text-center text-xl px-10 py-7 me-2 mb-2"
+                      onMouseEnter={handleMouseEnter}
+                      onMouseLeave={handleMouseLeave}
+                      onClick={handleStartRecording}
+                    >
+                      <div className="flex flex-row justify-center align-items-center">
+                        {" "}
+                        <span className="text-xl mr-3">
+                          <AiFillAudio fontSize={28} />
+                        </span>
+                        Answer
+                      </div>
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      className="text-white bg-green-600 hover:bg-green-700 block font-medium rounded-xl text-center text-xl px-10 py-7 me-2 mb-2"
+                      onMouseEnter={handleMouseEnter}
+                      onMouseLeave={handleMouseLeave}
+                      onClick={handleStopRecording}
+                    >
+                      <div className="flex flex-row justify-center align-items-center">
+                        {" "}
+                        <span className="text-xl mr-3">
+                          <AiFillAudio fontSize={28} />
+                        </span>
+                        <div className="flex  items-center gap-2">
+                          Recording
+                          <ImSpinner11 className="animate-spin" />
+                        </div>
+                      </div>
+                    </button>
+                  )}
+                  {isHovered && (
+                    <div className="absolute bg-slate-700 text-white p-2 rounded-md mt-1">
+                      {isRecording ? "Stop Recording" : "Answer with your mic"}
+                    </div>
+                  )}
+                </div>
+
+                <div>
+                  <button
+                    className="border border-blue-400 px-7 py-7 rounded-2xl mb-2 hover:bg-blue-50 mr-3 cursor-pointer"
+                    onMouseEnter={handleMouseEnter1}
+                    onMouseLeave={handleMouseLeave1}
+                    onClick={handlePreviousQuestion}
+                    disabled={currentQuestionIndex === 0}
                   >
-                    End
-                  </Link>
-                ) : (
-                  // Otherwise, display the Next button
-                  <>
-                    {recordedAudioBlob !== null ? (
-                      <button
-                        className="border border-blue-400 px-7 py-7 rounded-2xl mb-2 hover:bg-blue-50 cursor-pointer"
-                        onMouseEnter={handleMouseEnter2}
-                        onMouseLeave={handleMouseLeave2}
-                        onClick={() => {
-                          handleNextQuestion();
-                        }}
-                      >
-                        <GrLinkNext size={20} color="blue" />
-                      </button>
-                    ) : (
-                      <button
-                        className="border border-blue-400 px-7 py-7 rounded-2xl mb-2 hover:bg-blue-50 cursor-pointer"
-                        onMouseEnter={handleMouseEnter2}
-                        onMouseLeave={handleMouseLeave2}
-                        onClick={() => {
-                          alert("Please record your answer first");
-                        }}
-                      >
-                        <GrLinkNext size={20} color="blue" />
-                      </button>
-                    )}
-                  </>
-                )}
+                    <GrLinkPrevious size={20} color="blue" />
+                  </button>
+                  {isHovered1 && (
+                    <div className="absolute bg-slate-700 text-white p-2 rounded-md mt-1">
+                      Previous Question
+                    </div>
+                  )}
 
-                {isHovered2 && (
-                  <div className="absolute bg-slate-700 text-white p-2 rounded-md mt-1">
-                    {currentQuestionIndex === questions.length - 1
-                      ? "Finish Interview"
-                      : "Next Question"}
-                  </div>
-                )}
+                  {currentQuestionIndex === questions.length - 1 ? (
+                    // If it's the last question, display Finish Interview message
+                    <Link
+                      className="border border-blue-400 px-7 py-7 rounded-2xl mb-2 hover:bg-blue-50 cursor-pointer"
+                      onMouseEnter={handleMouseEnter2}
+                      onMouseLeave={handleMouseLeave2}
+                      onClick={() => (handleNextQuestion(), sendQuestions())}
+                      to="/Result"
+                    >
+                      End
+                    </Link>
+                  ) : (
+                    // Otherwise, display the Next button
+                    <>
+                      {recordedAudioBlob !== null ? (
+                        <button
+                          className="border border-blue-400 px-7 py-7 rounded-2xl mb-2 hover:bg-blue-50 cursor-pointer"
+                          onMouseEnter={handleMouseEnter2}
+                          onMouseLeave={handleMouseLeave2}
+                          onClick={() => {
+                            handleNextQuestion();
+                          }}
+                        >
+                          <GrLinkNext size={20} color="blue" />
+                        </button>
+                      ) : (
+                        <button
+                          className="border border-blue-400 px-7 py-7 rounded-2xl mb-2 hover:bg-blue-50 cursor-pointer"
+                          onMouseEnter={handleMouseEnter2}
+                          onMouseLeave={handleMouseLeave2}
+                          onClick={() => {
+                            alert("Please record your answer first");
+                          }}
+                        >
+                          <GrLinkNext size={20} color="blue" />
+                        </button>
+                      )}
+                    </>
+                  )}
+
+                  {isHovered2 && (
+                    <div className="absolute bg-slate-700 text-white p-2 rounded-md mt-1">
+                      {currentQuestionIndex === questions.length - 1
+                        ? "Finish Interview"
+                        : "Next Question"}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
-        </div>
+          <div className=" flex flex-col justify-center items-center">
+            <button
+              type="button"
+              className="text-3xl     text-white bg-gradient-to-r from-red-800 via-red-500 to-red-300 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300  font-medium rounded-lg px-10 py-4 text-center mt-20 cursor-pointer "
+              onClick={()=>navigate("/")}
+            >
+              Abort Interview
+            </button>
+          </div>
+        </>
       )}
       <AudioRecorder
         isRecording={isRecording}
