@@ -8,6 +8,7 @@ import AxiosInstance from "../api/AxiosInstance";
 import Loader_gif from "../assets/images/Loader_gif.gif";
 import { ImSpinner11 } from "react-icons/im";
 
+
 const QA = (data) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isHovered1, setIsHovered1] = useState(false);
@@ -36,6 +37,9 @@ const QA = (data) => {
       setLoading(false); // Set loading to false after uploading
     }
   };
+
+
+
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -92,6 +96,37 @@ const QA = (data) => {
       prevIndex === 0 ? questions.length - 1 : prevIndex - 1
     );
   };
+
+
+
+
+
+  
+  const pathName = window.location.pathname;
+  // console.log(pathName); // Output: /Technical-Interview
+  // Extract the desired part from the path name
+  const desiredPart = pathName.split('/').filter(part => part.trim() !== '')[0];
+  console.log("hello world ",desiredPart); // Output: Technical-Interview
+
+
+
+const sendQuestions = async () => {
+  
+  if(desiredPart==="Technical-Interview"){
+    try {
+      const res = await AxiosInstance.post("send_ques/", {questions:data.data});
+      console.log("question submitted successfully")
+    } catch (error) {
+      console.error("Error sending questions:", error);
+      
+    }
+
+  }
+  
+}
+
+
+
 
   return (
     <>
@@ -183,7 +218,7 @@ const QA = (data) => {
                     className="border border-blue-400 px-7 py-7 rounded-2xl mb-2 hover:bg-blue-50 cursor-pointer"
                     onMouseEnter={handleMouseEnter2}
                     onMouseLeave={handleMouseLeave2}
-                    onClick={handleNextQuestion}
+                    onClick={()=>(handleNextQuestion,sendQuestions())}
                     to="/Result"
                   >
                     End

@@ -5,10 +5,12 @@ import AxiosInstance from "../api/AxiosInstance";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
+
 const InterViewModal = ({ toggleInterviewModal }) => {
   const { currentUser, setUserData, userData } = useAuth();
   console.log(currentUser.uid);
   
+
 
   const navigate = useNavigate();
 
