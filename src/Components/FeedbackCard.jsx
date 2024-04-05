@@ -23,10 +23,15 @@ const FeedbackCard = ({ stars, Grammer, Accuracy, IID, IType }) => {
         </div>
       </div>
 
-      <div className="text-2xl font-semibold">Grammer & Correctness:</div>
-      <div className="text-xl font-semibold text-blue-600">
+      {/* <div className="text-2xl font-semibold">Grammer & Correctness:</div> */}
+      {/* <div className="text-xl font-semibold text-blue-600">
         {Grammer} Grammer with
         <div>{Accuracy} Accuracy!</div>
+      </div> */}
+
+      <div className="text-2xl font-semibold">Grammer Level :</div>
+      <div className="text-xl font-semibold text-blue-600">
+        {Grammer}
       </div>
     </div>
   );

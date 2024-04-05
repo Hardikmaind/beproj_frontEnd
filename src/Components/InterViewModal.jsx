@@ -1,20 +1,26 @@
-import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import AxiosInstance from "../api/AxiosInstance";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
-
 const InterViewModal = ({ toggleInterviewModal }) => {
+  // const [interviewData, setInterviewData] = useState({
+  //   user_interview_no: "",
+  //   type_of_interview: "",
+  // });
+
   const {
     currentUser,
     setUserData,
     userData,
-
+    // UIno,
+    // setUIno,
+    // InterviewType,
+    // setInterviewType,
   } = useAuth();
-  console.log(currentUser.uid);
-
+  // console.log("Interview Id: ",currentUser.uid);
 
   const navigate = useNavigate();
 
@@ -24,6 +30,18 @@ const InterViewModal = ({ toggleInterviewModal }) => {
         user_id: currentUser.uid,
         interview_type: argument,
       });
+
+      console.log("API Response:", res.data);
+      if(localStorage.getItem("userId") === null){
+        localStorage.setItem("userId", res.data.user);
+      }
+      localStorage.setItem("interviewType", res.data.type_of_interview);
+      // setInterviewData();
+      // console.log("Interview Data: ", interviewData);
+      // setUIno(res.data.user_interview_no);
+      // setInterviewType(res.data.type_of_interview);
+      // console.log("Interview Id: ", UIno);
+      // console.log("Interview Type: ", InterviewType);
 
       if (argument === "Technical") {
         navigate("/Technical-Interview");
@@ -35,6 +53,11 @@ const InterViewModal = ({ toggleInterviewModal }) => {
       console.log(error);
     }
   };
+
+  // useEffect(() => {
+  //   console.log("User Id number: ", UIno); // Log after state update
+  //   console.log("Interview Type 234242324: ", InterviewType); // Log after state update
+  // }, [UIno, InterviewType]); // Run this effect when id or InterviewType changes
 
   // Close modal when clicking outside or pressing Escape key
   useEffect(() => {
