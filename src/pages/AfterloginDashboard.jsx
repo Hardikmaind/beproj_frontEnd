@@ -256,7 +256,7 @@ const AfterloginDashboard = () => {
             </span>
           </div>
         </div>
-        <div className="text-4xl mt-8">Previous Feedbacks</div>
+        <div className="text-4xl mt-8">Previous Feedback</div>
         <div className="flex flex-row justify-between mt-12">
           <FeedbackCard
             stars={5}
@@ -273,9 +273,9 @@ const AfterloginDashboard = () => {
             IType={"HR"}
           />
           <FeedbackCard
-            stars={2}
-            Grammer={"Bad"}
-            Accuracy={"Bad"}
+            stars={2}  //Confidence
+            Grammer={"Bad"}   //Bert
+            Accuracy={"Bad"}  //Gemini
             IID={3}
             IType={"Technical"}
           />

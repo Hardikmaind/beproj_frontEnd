@@ -120,6 +120,20 @@ const QA = (data) => {
     }
   };
 
+  const sendUserId = async () => {
+    try {
+      const postData = {
+        user: localStorage.getItem("userId"),
+      };
+      const res = await AxiosInstance.post("get_interview_Feedback/", postData);
+      console.log("User Id submitted successfully");
+      console.log("All Feedback:", res.data);
+    } catch (error) {
+      console.error("Error sending User ID:", error);
+    }
+
+  }
+
   return (
     <>
       {loading && (
@@ -211,7 +225,7 @@ const QA = (data) => {
                       className="border border-blue-400 px-7 py-7 rounded-2xl mb-2 hover:bg-blue-50 cursor-pointer"
                       onMouseEnter={handleMouseEnter2}
                       onMouseLeave={handleMouseLeave2}
-                      onClick={() => (handleNextQuestion(), sendQuestions())}
+                      onClick={() => (handleNextQuestion(), sendQuestions(), sendUserId())}
                       to="/Result"
                     >
                       End
