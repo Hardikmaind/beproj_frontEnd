@@ -37,7 +37,7 @@ function ResultCard() {
             </div>
 
             <div className="text-4xl font-bold">
-              Grammer Score:
+              Grammar Score:
               <div>{randomGrammarScore}/10</div>
             </div>
           </div>

@@ -152,9 +152,10 @@ const QA = (data) => {
         <>
           <div className="w-7/12 h-fit mb-4 border mt-52 border-gray-200 rounded-3xl bg-white mx-auto shadow-2xl py-2">
             <div className="px-5 py-3">
-              <div className="text-3xl p-5 leading-relaxed">
-                {questions[currentQuestionIndex]}
-              </div>
+            <div className="text-3xl p-5 leading-relaxed">
+             Question&nbsp;{currentQuestionIndex + 1}: {questions[currentQuestionIndex]}
+            </div>
+
 
               <hr className="mt-10 -px-5 -py-5" />
 
