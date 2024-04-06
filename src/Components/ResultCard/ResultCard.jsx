@@ -6,7 +6,14 @@ import Stars from "../Stars";
 
 function ResultCard() {
   const { userData } = useAuth();
+  const getRandomNumber = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  };
 
+  // Generate a random number between 2 and 4
+  const randomStars = getRandomNumber(2, 4);
+  // const randomStars = Math.floor(Math.random() * 3) + 3;
+  const randomGrammarScore = Math.floor(Math.random() * 4) + 6;
   return (
     <div
       href="#"
@@ -25,13 +32,13 @@ function ResultCard() {
             <div className="text-4xl font-bold">
               Confidence Rating:
               <div className="justify-items-center text-5xl mt-2">
-                <Stars stars={2} />{" "}
+                <Stars stars={randomStars} />{" "}
               </div>
             </div>
 
             <div className="text-4xl font-bold">
               Grammer Score:
-              <div>5/10</div>
+              <div>{randomGrammarScore}/10</div>
             </div>
           </div>
 
