@@ -160,6 +160,7 @@ import useFetch from "../hooks/useFetch";
 import AxiosInstance from "../api/AxiosInstance";
 import FeedbackCard from "../Components/FeedbackCard";
 import InterViewModal from "../Components/InterViewModal";
+import { get } from "firebase/database";
 
 const AfterloginDashboard = () => {
   const { currentUser, setUserData, userData } = useAuth();
@@ -207,6 +208,8 @@ const AfterloginDashboard = () => {
         }
 
         localStorage.setItem("user_name", res.data.user.user_name);
+        localStorage.setItem("userId", res.data.user.id);
+        await getFeedback();
 
         // console.log("API call success", res.data);
       } catch (error) {
@@ -217,7 +220,7 @@ const AfterloginDashboard = () => {
     callApi();
   }, [currentUser, is_registered]);
 
-  useEffect(() => {
+  // useEffect(() => {
     const getFeedback = async () => {
       try {
         const postData = {
@@ -235,8 +238,8 @@ const AfterloginDashboard = () => {
         console.error("Error sending User ID:", error);
       }
     };
-    getFeedback();
-  }, []);
+  //   getFeedback();
+  // }, []);
 
   const closeModal = () => {
     setModalVisible(false);
@@ -290,7 +293,7 @@ const AfterloginDashboard = () => {
                 key={index}
                 stars={feedback.confidence_score}
                 Grammer={feedback.grammer_score}
-                IID={feedback.interview_id}
+                IID={feedback.user_interview_no}
                 IType={feedback.type_of_interview}
               />
             ))): (<div className="text-4xl text-blue-600 mt-10">Welcome to Acoustic Sure! Looks like you're new here. Start by giving your first interview  and let's build your journey together!</div>)
