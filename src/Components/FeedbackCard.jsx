@@ -3,6 +3,8 @@ import Stars from "./Stars";
 
 const FeedbackCard = ({ stars, Grammer, Accuracy, IID, IType }) => {
   // const stars = 2;
+
+
   return (
     <div className="border-2 border-blue-800 rounded-3xl flex flex-col w-1/4 h-full px-12 py-4 gap-2 hover:bg-blue-200">
       <div className="text-lg">
@@ -19,7 +21,7 @@ const FeedbackCard = ({ stars, Grammer, Accuracy, IID, IType }) => {
       <div className="text-2xl font-semibold">
         Confidence Rating:
         <div>
-          <Stars stars={stars} />{" "}
+          <Stars stars={stars+1} />{" "}
         </div>
       </div>
 

@@ -4,13 +4,27 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import Stars from "../Stars";
 
-function ResultCard({feedback}) {
+function ResultCard({ feedback }) {
   const { userData } = useAuth();
   const stars = feedback.confidence_score;
+  // var GrammerLevel;
+
+  // if (feedback.grammar_score > 0.8) {
+  //   GrammerLevel = "Excellent";
+  // } else if (feedback.grammar_score <= 0.8 && feedback.grammar_score > 0.6) {
+  //   GrammerLevel = "Good";
+  // } else if (feedback.grammar_score <= 0.6 && feedback.grammar_score > 0.3) {
+  //   GrammerLevel = "Average";
+  // } else {
+  //   GrammerLevel = "Poor";
+  // }
+  // console.log("aadiadiaidai", GrammerLevel);
+
   console.log("Stars:", stars);
+  console.log("hello hardik",feedback.grammer_score)
 
   // console.log("Feedback:", feedback);
-  
+
   // const getRandomNumber = (min, max) => {
   //   return Math.floor(Math.random() * (max - min + 1) + min);
   // };
@@ -35,16 +49,30 @@ function ResultCard({feedback}) {
 
         <div className="flex flex-col">
           <div className="flex flex-col justify-items-center mt-2 ml-2 gap-8">
+            {/* <div className="text-4xl font-bold">
+              Interview ID:
+              <div className="mt-1 font-semibold text-blue-600">
+                {userData.interview_id}
+              </div>
+            </div>
+             */}
             <div className="text-4xl font-bold">
               Confidence Rating:
               <div className="justify-items-center text-5xl mt-2">
-                <Stars stars={stars}/>{" "}
+                <Stars stars={stars + 1} />{" "}
               </div>
             </div>
-
             <div className="text-4xl font-bold">
               Grammar Level:
-              <div className="mt-1 font-semibold text-blue-600">Good</div>
+              <div className="mt-1 font-semibold text-blue-600">
+                {feedback.grammar_score > 0.8
+                  ? "Excellent"
+                  : feedback.grammer_score > 0.6
+                  ? "Good"
+                  : feedback.grammar_score > 0.3
+                  ? "Average"
+                  : "Poor"}
+              </div>
             </div>
           </div>
 
