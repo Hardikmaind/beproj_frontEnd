@@ -279,17 +279,22 @@ const AfterloginDashboard = () => {
             </span>
           </div>
         </div>
-        <div className="text-4xl mt-8">Previous Feedback</div>
-        <div className="flex flex-row justify-between mt-12">
-          {feedbackData.slice(-3).map((feedback, index) => (
-            <FeedbackCard
-              key={index}
-              stars={feedback.confidence_score}
-              Grammer={feedback.grammer_score}
-              IID={feedback.interview_id}
-              IType={feedback.type_of_interview}
-            />
-          ))}
+       {
+          feedbackData.length > 0 ? (
+            <div className="text-4xl mt-8">Previous Feedback</div>): null
+       }
+        <div className="flex flex-row gap-28 mt-12">
+          {
+            feedbackData.length > 0 ? (feedbackData.slice(-3).map((feedback, index) => (
+              <FeedbackCard
+                key={index}
+                stars={feedback.confidence_score}
+                Grammer={feedback.grammer_score}
+                IID={feedback.interview_id}
+                IType={feedback.type_of_interview}
+              />
+            ))): (<div className="text-4xl text-blue-600 mt-10">Welcome to Acoustic Sure! Looks like you're new here. Start by giving your first interview  and let's build your journey together!</div>)
+          }
         </div>
       </div>
       {interviewModalVisible ? (
