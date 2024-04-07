@@ -4,16 +4,22 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import Stars from "../Stars";
 
-function ResultCard() {
+function ResultCard({feedback}) {
   const { userData } = useAuth();
-  const getRandomNumber = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  };
+  const stars = feedback.confidence_score;
+  console.log("Stars:", stars);
+
+  // console.log("Feedback:", feedback);
+  
+  // const getRandomNumber = (min, max) => {
+  //   return Math.floor(Math.random() * (max - min + 1) + min);
+  // };
 
   // Generate a random number between 2 and 4
-  const randomStars = getRandomNumber(2, 4);
+  // const randomStars = getRandomNumber(2, 4);
   // const randomStars = Math.floor(Math.random() * 3) + 3;
-  const randomGrammarScore = Math.floor(Math.random() * 4) + 6;
+  // const randomGrammarScore = Math.floor(Math.random() * 4) + 6;
+
   return (
     <div
       href="#"
@@ -28,21 +34,21 @@ function ResultCard() {
         />
 
         <div className="flex flex-col">
-          <div className="flex flex-col justify-items-center mt-2 ml-6 gap-6">
+          <div className="flex flex-col justify-items-center mt-2 ml-2 gap-8">
             <div className="text-4xl font-bold">
               Confidence Rating:
               <div className="justify-items-center text-5xl mt-2">
-                <Stars stars={randomStars} />{" "}
+                <Stars stars={stars}/>{" "}
               </div>
             </div>
 
             <div className="text-4xl font-bold">
-              Grammar Score:
-              <div>{randomGrammarScore}/10</div>
+              Grammar Level:
+              <div className="mt-1 font-semibold text-blue-600">Good</div>
             </div>
           </div>
 
-          <div className="text-center py-10 ">
+          <div className="text-center py-10 mt-5 ">
             <Link
               to={"/"}
               className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300  font-medium rounded-lg text-sm px-5 py-4 text-center mt-8 cursor-pointer "
