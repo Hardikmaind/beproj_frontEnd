@@ -36,6 +36,7 @@ const InterViewModal = ({ toggleInterviewModal }) => {
         localStorage.setItem("userId", res.data.user);
       }
       localStorage.setItem("interviewType", res.data.type_of_interview);
+      localStorage.setItem("interviewId", res.data.interview_id);
       // setInterviewData();
       // console.log("Interview Data: ", interviewData);
       // setUIno(res.data.user_interview_no);

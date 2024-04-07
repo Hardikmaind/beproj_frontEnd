@@ -170,6 +170,8 @@ const AfterloginDashboard = () => {
     const { data, loading, error } = useFetch("tech_questions/");
   };
 
+  const [feedbackData, setFeedbackData] = useState([]);
+
   useEffect(() => {
     const callApi = async () => {
       try {
@@ -215,6 +217,27 @@ const AfterloginDashboard = () => {
     callApi();
   }, [currentUser, is_registered]);
 
+  useEffect(() => {
+    const getFeedback = async () => {
+      try {
+        const postData = {
+          user: localStorage.getItem("userId"),
+        };
+        const res = await AxiosInstance.post(
+          "get_interview_Feedback/",
+          postData
+        );
+
+        console.log("User Id submitted successfully");
+        console.log("All Feedback:", res.data);
+        setFeedbackData(res.data);
+      } catch (error) {
+        console.error("Error sending User ID:", error);
+      }
+    };
+    getFeedback();
+  }, []);
+
   const closeModal = () => {
     setModalVisible(false);
   };
@@ -258,27 +281,15 @@ const AfterloginDashboard = () => {
         </div>
         <div className="text-4xl mt-8">Previous Feedback</div>
         <div className="flex flex-row justify-between mt-12">
-          <FeedbackCard
-            stars={5}
-            Grammer={"Good"}
-            Accuracy={"Decent"}
-            IID={1}
-            IType={"Technical"}
-          />
-          <FeedbackCard
-            stars={3.9}
-            Grammer={"Good"}
-            Accuracy={"Great"}
-            IID={2}
-            IType={"HR"}
-          />
-          <FeedbackCard
-            stars={2}  //Confidence
-            Grammer={"Bad"}   //Bert
-            Accuracy={"Bad"}  //Gemini
-            IID={3}
-            IType={"Technical"}
-          />
+          {feedbackData.slice(-3).map((feedback, index) => (
+            <FeedbackCard
+              key={index}
+              stars={feedback.confidence_score}
+              Grammer={feedback.grammer_score}
+              IID={feedback.interview_id}
+              IType={feedback.type_of_interview}
+            />
+          ))}
         </div>
       </div>
       {interviewModalVisible ? (

@@ -120,14 +120,16 @@ const QA = (data) => {
     }
   };
 
-  const sendUserId = async () => {
+
+  const getConfidence= async () => {
     try {
       const postData = {
-        user: localStorage.getItem("userId"),
+        interviewid : localStorage.getItem("interviewId"),
+        userid: localStorage.getItem("userId")
       };
-      const res = await AxiosInstance.post("get_interview_Feedback/", postData);
+      const res = await AxiosInstance.post("get_confidence/", postData);
       console.log("User Id submitted successfully");
-      console.log("All Feedback:", res.data);
+      console.log("Confifence score is :", res.data);
     } catch (error) {
       console.error("Error sending User ID:", error);
     }
@@ -226,7 +228,7 @@ const QA = (data) => {
                       className="border border-blue-400 px-7 py-7 rounded-2xl mb-2 hover:bg-blue-50 cursor-pointer"
                       onMouseEnter={handleMouseEnter2}
                       onMouseLeave={handleMouseLeave2}
-                      onClick={() => (handleNextQuestion(), sendQuestions(), sendUserId())}
+                      onClick={async() => (await handleNextQuestion(), await sendQuestions(), getConfidence())}
                       to="/Result"
                     >
                       End
