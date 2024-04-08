@@ -1,9 +1,19 @@
 import React from "react";
 import Stars from "./Stars";
 
-const FeedbackCard = ({ stars, Grammer, Accuracy, IID, IType }) => {
+const FeedbackCard = ({ stars, Grammar, Accuracy, IID, IType }) => {
   // const stars = 2;
-
+  var GrammerLevel;
+  if (Grammar > 0.8) {
+    GrammerLevel = "Excellent";
+  } else if (Grammar <= 0.8 && Grammar > 0.6) {
+    GrammerLevel = "Good";
+  } else if (Grammar <= 0.6 && Grammar > 0.3) {
+    GrammerLevel = "Average";
+  } else {
+    GrammerLevel = "Poor";
+  }
+  console.log("aadiadiaidai", GrammerLevel);
 
   return (
     <div className="border-2 border-blue-800 rounded-3xl flex flex-col w-1/4 h-full px-12 py-4 gap-2 hover:bg-blue-200">
@@ -33,7 +43,7 @@ const FeedbackCard = ({ stars, Grammer, Accuracy, IID, IType }) => {
 
       <div className="text-2xl font-semibold">Grammer Level:</div>
       <div className="text-xl font-semibold text-blue-600">
-        {Grammer}
+        {GrammerLevel}
       </div>
     </div>
   );
