@@ -292,7 +292,7 @@ const AfterloginDashboard = () => {
               <FeedbackCard
                 key={index}
                 stars={feedback.confidence_score}
-                Grammer={feedback.grammer_score}
+                Grammar={feedback.grammer_score}
                 IID={feedback.user_interview_no}
                 IType={feedback.type_of_interview}
               />

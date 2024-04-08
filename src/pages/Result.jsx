@@ -18,7 +18,7 @@ const Result = () => {
   const toggleQAModal = () => {
     setShowModal(!showModal);
   };
-
+  
   const callApi = async () => {
     try {
       const res = await AxiosInstance.get("rate_answers/");
@@ -47,24 +47,25 @@ const Result = () => {
     document.addEventListener("keydown", handleEscapeKey);
   }, [toggleQAModal]);
 
+  const  getFeedback = async () => {
+    try {
+      const postData = {
+        user: localStorage.getItem("userId"),
+      };
+      const res = await AxiosInstance.post(
+        "get_interview_Feedback/",
+        postData
+      );
+      setLoadingResult(false);
+      console.log("User Id submitted successfully");
+      console.log("All Feedback:", res.data);
+      setFeedback(res.data[res.data.length-1]);
+    } catch (error) {
+      console.error("Error sending User ID:", error);
+    }
+  };
+
   useEffect(() => {
-    const getFeedback = async () => {
-      try {
-        const postData = {
-          user: localStorage.getItem("userId"),
-        };
-        const res = await AxiosInstance.post(
-          "get_interview_Feedback/",
-          postData
-        );
-        setLoadingResult(false);
-        console.log("User Id submitted successfully");
-        console.log("All Feedback:", res.data);
-        setFeedback(res.data[res.data.length-1]);
-      } catch (error) {
-        console.error("Error sending User ID:", error);
-      }
-    };
     getFeedback();
   }, []);
 
