@@ -7,14 +7,14 @@ import Stars from "../Stars";
 function ResultCard({ feedback }) {
   const { userData } = useAuth();
   const stars = feedback.confidence_score;
-  let GrammarScore = feedback.grammar_score;
+  // let GrammarScore = feedback.grammer_score;
 
   var GrammerLevel;
-  if (feedback.grammar_score > 0.8) {
+  if (feedback.grammer_score > 0.8) {
     GrammerLevel = "Excellent";
-  } else if (feedback.grammar_score <= 0.8 && feedback.grammar_score > 0.6) {
+  } else if (feedback.grammer_score <= 0.8 && feedback.grammer_score > 0.6) {
     GrammerLevel = "Good";
-  } else if (feedback.grammar_score <= 0.6 && feedback.grammar_score > 0.3) {
+  } else if (feedback.grammer_score <= 0.6 && feedback.grammer_score > 0.3) {
     GrammerLevel = "Average";
   } else {
     GrammerLevel = "Poor";
@@ -66,7 +66,7 @@ function ResultCard({ feedback }) {
             <div className="text-4xl font-bold">
               Grammar Level:
               <div className="mt-1 font-semibold text-blue-600">
-                {GrammarScore}
+                {GrammerLevel}
               </div>
             </div>
           </div>
