@@ -136,6 +136,15 @@ const QA = (data) => {
 
   }
 
+  const handleEndInterview = async () => {
+    await handleUpload(recordedAudioBlob),
+    await sendQuestions();
+    const confidenceScore = await getConfidence();
+    if (confidenceScore !== null) {
+      navigate("/Result");
+    }
+  };
+
   return (
     <>
       {loading && (
@@ -228,8 +237,8 @@ const QA = (data) => {
                       className="border border-blue-400 px-7 py-7 rounded-2xl mb-2 hover:bg-blue-50 cursor-pointer"
                       onMouseEnter={handleMouseEnter2}
                       onMouseLeave={handleMouseLeave2}
-                      onClick={async() => (await handleNextQuestion(), await sendQuestions(), getConfidence())}
-                      to="/Result"
+                      onClick={async() => (await handleEndInterview(), await sendQuestions(), getConfidence())}
+                      // to="/Result"
                     >
                       End
                     </Link>

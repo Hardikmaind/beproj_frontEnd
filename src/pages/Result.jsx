@@ -18,7 +18,7 @@ const Result = () => {
   const toggleQAModal = () => {
     setShowModal(!showModal);
   };
-  
+
   const callApi = async () => {
     try {
       const res = await AxiosInstance.get("rate_answers/");
@@ -122,7 +122,7 @@ const Result = () => {
       </div>
       {showModal && !loading && (
         <ResultModal toggleQAModal={toggleQAModal} data={data} />
-      )}
+      )}  
       {/* {loading && <div>Loading......</div>} */}
     </>
   );
