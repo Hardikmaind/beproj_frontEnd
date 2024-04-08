@@ -237,7 +237,7 @@ const QA = (data) => {
                       className="border border-blue-400 px-7 py-7 rounded-2xl mb-2 hover:bg-blue-50 cursor-pointer"
                       onMouseEnter={handleMouseEnter2}
                       onMouseLeave={handleMouseLeave2}
-                      onClick={async() => (await handleEndInterview(), await sendQuestions(), getConfidence())}
+                      onClick={async() => (await handleEndInterview(), await sendQuestions())}
                       // to="/Result"
                     >
                       End
