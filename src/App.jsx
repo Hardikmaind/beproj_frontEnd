@@ -12,6 +12,8 @@ import Techincal from "./pages/Interview/Technical";
 import HR from "./pages/Interview/HR";
 import Result from "./pages/Result";
 import AudioRecorder from "./Components/AudioRecorderMain";
+import { Toaster, toast } from 'sonner'
+
 
 
 function App() {
@@ -20,6 +22,8 @@ function App() {
 
   return (
     <BrowserRouter>
+    <Toaster position="top-center"  richColors  />
+
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/Page404" element={<Page404 />} />

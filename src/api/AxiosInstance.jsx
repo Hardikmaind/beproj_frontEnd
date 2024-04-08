@@ -1,9 +1,9 @@
 import axios from "axios"; // Renamed the imported type
 
 const AxiosInstance = axios.create({
-  baseURL: "http://192.168.0.117:8000/api/",
+  // baseURL: "http://192.168.0.117:8000/api/",
   // baseURL: "http://192.168.101.241:8000/api/",
-  // baseURL: "http://127.0.0.1:8000/api/",
+  baseURL: "http://127.0.0.1:8000/api/",
 
 });
 AxiosInstance.interceptors.request.use(async (request) => {

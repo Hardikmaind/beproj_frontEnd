@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext"; // Import the AuthContext
 import { useNavigate } from "react-router-dom";
+import { Toaster, toast } from 'sonner'
+
 
 const Login = ({ showLogin, setShowLogin }) => {
   const [email, setEmail] = useState("");
@@ -21,9 +23,13 @@ const Login = ({ showLogin, setShowLogin }) => {
       console.log(res)
       console.log("Logged in");
       navigate("/", { replace: true }); // Redirect to the protected route
+      toast.success('YOU HAVE LOGGED IN SUCCESSFULLY!')
+
     } catch (error) {
       console.error(error);
       // Display error message to the user
+      console.log("this is the error")
+      toast.error('Invalid Credentials! Please try again.')
     }
   };
 
