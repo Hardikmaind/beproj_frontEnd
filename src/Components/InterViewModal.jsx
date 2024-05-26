@@ -24,7 +24,9 @@ const InterViewModal = ({ toggleInterviewModal }) => {
 
   const navigate = useNavigate();
 
-  const createInterviewId = async (argument) => {
+  const createInterviewId = async (argument,event) => {
+    event.preventDefault();
+
     try {
       const res = await AxiosInstance.post("InterviewCreate-id/", {
         user_id: currentUser.uid,
@@ -123,9 +125,9 @@ const InterViewModal = ({ toggleInterviewModal }) => {
                 className="hidden peer"
                 required
               />
-              <div
-                onClick={() => {
-                  createInterviewId("Technical");
+              <button
+                onClick={(e) => {
+                  createInterviewId("Technical",e);
                   // navigate("/Technical-Interview");
                 }}
                 htmlFor="job-1"
@@ -154,7 +156,7 @@ const InterViewModal = ({ toggleInterviewModal }) => {
                     d="M1 5h12m0 0L9 1m4 4L9 9"
                   />
                 </svg>
-              </div>
+              </button>
             </li>
             <li className="">
               <input
@@ -164,9 +166,9 @@ const InterViewModal = ({ toggleInterviewModal }) => {
                 value="job-2"
                 className="hidden peer"
               />
-              <div
-                onClick={() => {
-                  createInterviewId("HR");
+              <button
+                onClick={(e) => {
+                  createInterviewId("HR",e);
                 }}
                 htmlFor="job-2"
                 className="inline-flex items-center justify-between w-full p-5 text-gray-900 bg-white border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100"
@@ -194,7 +196,7 @@ const InterViewModal = ({ toggleInterviewModal }) => {
                     d="M1 5h12m0 0L9 1m4 4L9 9"
                   />
                 </svg>
-              </div>
+              </button>
             </li>
           </ul>
           {/* Next step button */}
