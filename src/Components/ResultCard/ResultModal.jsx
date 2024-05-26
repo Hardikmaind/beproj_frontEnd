@@ -1,7 +1,7 @@
-import React from "react";
-import SingleQuestionFeedback from "./SingleQuestionFeedback";
+import React from 'react'
+import SingleQuestionFeedback from './SingleQuestionFeedback'
 
-const ResultModal = ({ toggleQAModal,data }) => {
+const ResultModal = ({ toggleQAModal, data }) => {
   return (
     <div>
       <div
@@ -12,7 +12,7 @@ const ResultModal = ({ toggleQAModal,data }) => {
           {/* Fixed header */}
           <div className="flex items-center justify-between p-4 md:p-5 border-b-4 border-blue-600  rounded-t-lg bg-white w-2/3">
             <h3 className="text-xl font-semibold text-gray-900">
-              Detailed analysis of your   Answers
+              Detailed analysis of your Answers
             </h3>
             <button
               type="button"
@@ -43,18 +43,22 @@ const ResultModal = ({ toggleQAModal,data }) => {
           <div className="relative z-50 bg-white  shadow-lg h-4/5 w-2/3 overflow-y-auto rounded-b-lg max-h-[80vh]">
             <div className="relative bg-white  shadow">
               <div className="p-4 md:p-5 space-y-4 pt-[5rem]">
-                {
-                  data.map((item,index)=>(
-                    <SingleQuestionFeedback key={index} Que={item.question} Ans={item.suggestion} rating ={item.rating} index={index+1}/>
-                  ))
-                }
+                {data.map((item, index) => (
+                  <SingleQuestionFeedback
+                    key={index}
+                    Que={item.question}
+                    Ans={item.suggestion}
+                    rating={item.rating}
+                    index={index + 1}
+                  />
+                ))}
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ResultModal;
+export default ResultModal

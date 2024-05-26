@@ -1,5 +1,5 @@
 // Card.jsx
-import React from "react";
+import React from 'react'
 
 function Card(props) {
   return (
@@ -20,7 +20,7 @@ function Card(props) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default Card;
+export default Card

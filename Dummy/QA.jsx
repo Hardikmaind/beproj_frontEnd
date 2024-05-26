@@ -1,61 +1,59 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from 'react'
 
-import { AiFillAudio } from "react-icons/ai";
-import { GrLinkNext } from "react-icons/gr";
-import { GrLinkPrevious } from "react-icons/gr";
-import AudioRecorder from "./AudioRecorder";
-import { Link } from "react-router-dom";
+import { AiFillAudio } from 'react-icons/ai'
+import { GrLinkNext } from 'react-icons/gr'
+import { GrLinkPrevious } from 'react-icons/gr'
+import AudioRecorder from './AudioRecorder'
+import { Link } from 'react-router-dom'
 
 const QA = (data) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [isHovered1, setIsHovered1] = useState(false);
-  const [isHovered2, setIsHovered2] = useState(false);
+  const [isHovered, setIsHovered] = useState(false)
+  const [isHovered1, setIsHovered1] = useState(false)
+  const [isHovered2, setIsHovered2] = useState(false)
 
   const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
+    setIsHovered(true)
+  }
 
   const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
+    setIsHovered(false)
+  }
 
   const handleMouseEnter1 = () => {
-    setIsHovered1(true);
-  };
+    setIsHovered1(true)
+  }
 
   const handleMouseLeave1 = () => {
-    setIsHovered1(false);
-  };
+    setIsHovered1(false)
+  }
 
   const handleMouseEnter2 = () => {
-    setIsHovered2(true);
-  };
+    setIsHovered2(true)
+  }
 
   const handleMouseLeave2 = () => {
-    setIsHovered2(false);
-  };
+    setIsHovered2(false)
+  }
 
   // console.log("data", data.data);
 
-
-
   const questions = data.data.interview_questions.map(
-    (question) => question.question_list
-  );
+    (question) => question.question_list,
+  )
 
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
 
   const handleNextQuestion = () => {
     setCurrentQuestionIndex((prevIndex) =>
-      prevIndex === questions.length - 1 ? 0 : prevIndex + 1
-    );
-  };
+      prevIndex === questions.length - 1 ? 0 : prevIndex + 1,
+    )
+  }
 
   const handlePreviousQuestion = () => {
     setCurrentQuestionIndex((prevIndex) =>
-      prevIndex === 0 ? questions.length - 1 : prevIndex - 1
-    );
-  };
+      prevIndex === 0 ? questions.length - 1 : prevIndex - 1,
+    )
+  }
 
   return (
     <>
@@ -76,7 +74,7 @@ const QA = (data) => {
                 onMouseLeave={handleMouseLeave}
               >
                 <div className="flex flex-row justify-center align-items-center">
-                  {" "}
+                  {' '}
                   <span className="text-xl mr-3">
                     <AiFillAudio fontSize={28} />
                   </span>
@@ -132,8 +130,8 @@ const QA = (data) => {
               {isHovered2 && (
                 <div className="absolute bg-slate-700 text-white p-2 rounded-md mt-1">
                   {currentQuestionIndex === questions.length - 1
-                    ? "Finish Interview"
-                    : "Next Question"}
+                    ? 'Finish Interview'
+                    : 'Next Question'}
                 </div>
               )}
             </div>
@@ -141,7 +139,7 @@ const QA = (data) => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default QA;
+export default QA

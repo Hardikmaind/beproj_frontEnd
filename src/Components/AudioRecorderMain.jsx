@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from 'react'
 
 const AudioRecorder = ({
   isRecording,
@@ -7,49 +7,49 @@ const AudioRecorder = ({
   onRecordingEnded,
   setRecordedAudioBlob,
 }) => {
-  const audioChunk = useRef([]);
-  const [recording, setRecording] = useState(null);
-  const mediaRecorderRef = useRef(null);
-  const startTimeRef = useRef(null);
-  const timeLimit = 25000; // 25 seconds
-  const autoStopTime = 30000; // 30 seconds
+  const audioChunk = useRef([])
+  const [recording, setRecording] = useState(null)
+  const mediaRecorderRef = useRef(null)
+  const startTimeRef = useRef(null)
+  const timeLimit = 25000 // 25 seconds
+  const autoStopTime = 30000 // 30 seconds
   // const [autoStopTime, setAutoStopTime] = useState(30000); // Initial auto stop time
   // const [timeLimit, settimeLimit] = useState(25000); // Initial auto stop time
 
   useEffect(() => {
     if (isRecording) {
-      startRec();
+      startRec()
     } else {
-      stopRec();
+      stopRec()
     }
-  }, [isRecording]);
+  }, [isRecording])
 
   const startRec = async () => {
-    audioChunk.current = [];
-    console.log("Recording started");
+    audioChunk.current = []
+    console.log('Recording started')
 
     // try {
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    const mediaRecorder = new MediaRecorder(stream);
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
+    const mediaRecorder = new MediaRecorder(stream)
 
     mediaRecorder.ondataavailable = (e) => {
       if (e.data.size > 0) {
-        audioChunk.current.push(e.data);
+        audioChunk.current.push(e.data)
       }
-    };
+    }
 
     mediaRecorder.onstop = () => {
-      const audioBlob = new Blob(audioChunk.current, { type: "audio/wav" });
-      const audioUrl = URL.createObjectURL(audioBlob);
-      setRecording(audioUrl);
-      onRecordingEnded(audioUrl);
-      setRecordedAudioBlob(audioBlob);
+      const audioBlob = new Blob(audioChunk.current, { type: 'audio/wav' })
+      const audioUrl = URL.createObjectURL(audioBlob)
+      setRecording(audioUrl)
+      onRecordingEnded(audioUrl)
+      setRecordedAudioBlob(audioBlob)
       // console.log("Audio", audioBlob);
-    };
+    }
 
-    mediaRecorderRef.current = mediaRecorder;
-    startTimeRef.current = Date.now();
-    mediaRecorder.start();
+    mediaRecorderRef.current = mediaRecorder
+    startTimeRef.current = Date.now()
+    mediaRecorder.start()
 
     // setTimeout(() => {
     //   if (
@@ -69,20 +69,20 @@ const AudioRecorder = ({
     // } catch (error) {
     //   console.error("Error accessing microphone:", error);
     // }
-  };
+  }
 
   const stopRec = () => {
     if (
       mediaRecorderRef.current &&
-      mediaRecorderRef.current.state === "recording"
+      mediaRecorderRef.current.state === 'recording'
     ) {
-      mediaRecorderRef.current.stop();
-      setIsRecording(false);
-      console.log("Recording stopped");
+      mediaRecorderRef.current.stop()
+      setIsRecording(false)
+      console.log('Recording stopped')
     }
-  };
+  }
 
-  return <div>{/* <audio controls src={recording} /> */}</div>;
-};
+  return <div>{/* <audio controls src={recording} /> */}</div>
+}
 
-export default AudioRecorder;
+export default AudioRecorder

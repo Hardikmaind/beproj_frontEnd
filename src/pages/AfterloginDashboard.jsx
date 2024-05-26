@@ -150,28 +150,28 @@
 
 // export default AfterloginDashboard;
 
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import Card from "../Components/card";
-import FormModal from "../Components/FormModal";
-import { useAuth } from "../context/AuthContext";
-import useFetch from "../hooks/useFetch";
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import Card from '../Components/card'
+import FormModal from '../Components/FormModal'
+import { useAuth } from '../context/AuthContext'
+import useFetch from '../hooks/useFetch'
 // import  Axios  from "axios";
-import AxiosInstance from "../api/AxiosInstance";
-import FeedbackCard from "../Components/FeedbackCard";
-import InterViewModal from "../Components/InterViewModal";
-import { get } from "firebase/database";
+import AxiosInstance from '../api/AxiosInstance'
+import FeedbackCard from '../Components/FeedbackCard'
+import InterViewModal from '../Components/InterViewModal'
+import { get } from 'firebase/database'
 
 const AfterloginDashboard = () => {
-  const { currentUser, setUserData, userData } = useAuth();
-  const [is_registered, setIs_registered] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [interviewModalVisible, setInterviewModalVisible] = useState(false);
+  const { currentUser, setUserData, userData } = useAuth()
+  const [is_registered, setIs_registered] = useState(false)
+  const [modalVisible, setModalVisible] = useState(false)
+  const [interviewModalVisible, setInterviewModalVisible] = useState(false)
   const fetchquestions = () => {
-    const { data, loading, error } = useFetch("tech_questions/");
-  };
+    const { data, loading, error } = useFetch('tech_questions/')
+  }
 
-  const [feedbackData, setFeedbackData] = useState([]);
+  const [feedbackData, setFeedbackData] = useState([])
 
   useEffect(() => {
     const callApi = async () => {
@@ -179,75 +179,69 @@ const AfterloginDashboard = () => {
         if (!currentUser) {
           // Handle the case when currentUser is not available
           // console.error("Current user not available");
-          return;
+          return
         }
 
-        const idToken = await currentUser.getIdToken();
+        const idToken = await currentUser.getIdToken()
 
-        const res = await AxiosInstance.get("create_user/", {
+        const res = await AxiosInstance.get('create_user/', {
           headers: {
             Authorization: `Bearer ${idToken}`,
           },
-        });
+        })
 
-        setIs_registered(res.data.user.is_registered);
-        await localStorage.setItem(
-          "is_registered",
-          res.data.user.is_registered
-        );
+        setIs_registered(res.data.user.is_registered)
+        await localStorage.setItem('is_registered', res.data.user.is_registered)
         setUserData({
           ...userData,
           user_name: res.data.user.user_name,
-        });
-        console.log(userData);
-        console.log(is_registered);
+        })
+        console.log(userData)
+        console.log(is_registered)
 
         // If user is not registered, show the modal
         if (!is_registered) {
-          setModalVisible(true);
+          setModalVisible(true)
         }
 
-        localStorage.setItem("user_name", res.data.user.user_name);
-        localStorage.setItem("userId", res.data.user.id);
-        await getFeedback();
+        localStorage.setItem('user_name', res.data.user.user_name)
+        localStorage.setItem('userId', res.data.user.id)
+        await getFeedback()
 
         // console.log("API call success", res.data);
       } catch (error) {
-        console.error("API call error", error);
+        console.error('API call error', error)
       }
-    };
+    }
 
-    callApi();
-  }, [currentUser, is_registered]);
+    callApi()
+  }, [currentUser, is_registered])
 
   // useEffect(() => {
-    const getFeedback = async () => {
-      try {
-        const postData = {
-          user: localStorage.getItem("userId"),
-        };
-        const res = await AxiosInstance.post(
-          "get_interview_Feedback/",
-          postData
-        );
-
-        console.log("User Id submitted successfully");
-        console.log("All Feedback:", res.data);
-        setFeedbackData(res.data);
-      } catch (error) {
-        console.error("Error sending User ID:", error);
+  const getFeedback = async () => {
+    try {
+      const postData = {
+        user: localStorage.getItem('userId'),
       }
-    };
+      const res = await AxiosInstance.post('get_interview_Feedback/', postData)
+
+      console.log('User Id submitted successfully')
+      console.log('All Feedback:', res.data)
+      setFeedbackData(res.data)
+    } catch (error) {
+      console.error('Error sending User ID:', error)
+    }
+  }
   //   getFeedback();
   // }, []);
 
   const closeModal = () => {
-    setModalVisible(false);
-  };
+    setModalVisible(false)
+  }
 
   const toggleInterviewModal = () => {
-    setInterviewModalVisible(!interviewModalVisible);
-  };
+    setInterviewModalVisible(!interviewModalVisible)
+  }
 
   return (
     <>
@@ -282,22 +276,28 @@ const AfterloginDashboard = () => {
             </span>
           </div>
         </div>
-       {
-          feedbackData.length > 0 ? (
-            <div className="text-4xl mt-8">Previous Feedback</div>): null
-       }
+        {feedbackData.length > 0 ? (
+          <div className="text-4xl mt-8">Previous Feedback</div>
+        ) : null}
         <div className="flex flex-row gap-28 mt-12">
-          {
-            feedbackData.length > 0 ? (feedbackData.slice(-3).map((feedback, index) => (
-              <FeedbackCard
-                key={index}
-                stars={feedback.confidence_score}
-                Grammar={feedback.grammer_score}
-                IID={feedback.user_interview_no}
-                IType={feedback.type_of_interview}
-              />
-            ))): (<div className="text-4xl text-blue-600 mt-10">Welcome to Acoustic Sure! Looks like you're new here. Start by giving your first interview  and let's build your journey together!</div>)
-          }
+          {feedbackData.length > 0 ? (
+            feedbackData
+              .slice(-3)
+              .map((feedback, index) => (
+                <FeedbackCard
+                  key={index}
+                  stars={feedback.confidence_score}
+                  Grammar={feedback.grammer_score}
+                  IID={feedback.user_interview_no}
+                  IType={feedback.type_of_interview}
+                />
+              ))
+          ) : (
+            <div className="text-4xl text-blue-600 mt-10">
+              Welcome to Acoustic Sure! Looks like you're new here. Start by
+              giving your first interview and let's build your journey together!
+            </div>
+          )}
         </div>
       </div>
       {interviewModalVisible ? (
@@ -307,11 +307,11 @@ const AfterloginDashboard = () => {
           toggleInterviewModal={toggleInterviewModal}
         />
       ) : null}
-      {!localStorage.getItem("is_registered") ? (
+      {!localStorage.getItem('is_registered') ? (
         <FormModal closeModal={closeModal} />
       ) : null}
     </>
-  );
-};
+  )
+}
 
-export default AfterloginDashboard;
+export default AfterloginDashboard

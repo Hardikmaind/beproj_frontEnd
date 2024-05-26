@@ -1,6 +1,6 @@
-import React from "react";
-import { FaStar, FaStarHalfAlt } from "react-icons/fa";
-import { AiOutlineStar } from "react-icons/ai";
+import React from 'react'
+import { FaStar, FaStarHalfAlt } from 'react-icons/fa'
+import { AiOutlineStar } from 'react-icons/ai'
 
 const Stars = ({ stars }) => {
   const ratingStar = Array.from({ length: 5 }, (elem, index) => {
@@ -14,10 +14,10 @@ const Stars = ({ stars }) => {
           <AiOutlineStar className="text-yellow-500" />
         )}
       </span>
-    );
-  });
+    )
+  })
 
-  return <div className="flex flex-row gap-2 mt-1">{ratingStar}</div>;
-};
+  return <div className="flex flex-row gap-2 mt-1">{ratingStar}</div>
+}
 
-export default Stars;
+export default Stars

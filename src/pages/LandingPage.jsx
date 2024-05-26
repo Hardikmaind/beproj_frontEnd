@@ -1,33 +1,33 @@
-import React from "react";
-import Login from "../Components/Login";
-import Signup from "../Components/Signup";
-import { useState } from "react";
-import login_bg2 from "../assets/images/landing2.png";
-import { useEffect } from "react";
+import React from 'react'
+import Login from '../Components/Login'
+import Signup from '../Components/Signup'
+import { useState } from 'react'
+import login_bg2 from '../assets/images/landing2.png'
+import { useEffect } from 'react'
 function LandingPage() {
-  const [showLogin, setShowLogin] = useState(true);
-  const [begin, setBegin] = useState(false);
-  console.log(begin);
+  const [showLogin, setShowLogin] = useState(true)
+  const [begin, setBegin] = useState(false)
+  console.log(begin)
   const toggle = () => {
-    setBegin(!begin), console.log("button pressed");
-  };
+    setBegin(!begin), console.log('button pressed')
+  }
   useEffect(() => {
     const handleOutsideClick = (e) => {
-      if (e.target.classList.contains("hardik")) {
-        console.log("hello hardik")
-        toggle();
+      if (e.target.classList.contains('hardik')) {
+        console.log('hello hardik')
+        toggle()
       }
-    };
+    }
     const handleEscapeKey = (e) => {
-      if (e.key === "Escape") {
-        if(begin){
-          toggle();
+      if (e.key === 'Escape') {
+        if (begin) {
+          toggle()
         }
       }
-    };
-    document.addEventListener("mousedown", handleOutsideClick);
-    document.addEventListener("keydown", handleEscapeKey);
-  }, [toggle]);
+    }
+    document.addEventListener('mousedown', handleOutsideClick)
+    document.addEventListener('keydown', handleEscapeKey)
+  }, [toggle])
   return (
     <div className="">
       <div className="flex justify-center items-center h-screen min-h-screen  hardik  w-full">
@@ -40,7 +40,7 @@ function LandingPage() {
           <button
             className="bg-blue-500 text-white z-50 px-4 py-2 rounded mr-2"
             onClick={() => {
-              toggle();
+              toggle()
             }}
           >
             Get Started!
@@ -67,7 +67,7 @@ function LandingPage() {
         ) : null}
       </div>
     </div>
-  );
+  )
 }
 
-export default LandingPage;
+export default LandingPage

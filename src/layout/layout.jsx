@@ -1,8 +1,5 @@
-
-
-
-import { Outlet } from "react-router";
-import Navbar from "../Components/Navbar";
+import { Outlet } from 'react-router'
+import Navbar from '../Components/Navbar'
 
 const Layout = () => {
   return (
@@ -12,7 +9,7 @@ const Layout = () => {
       </div>
       <Outlet />
     </div>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout

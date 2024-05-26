@@ -1,28 +1,28 @@
-import React from "react";
-import hurray from "../../assets/images/hurray.gif";
-import { Link } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
-import Stars from "../Stars";
+import React from 'react'
+import hurray from '../../assets/images/hurray.gif'
+import { Link } from 'react-router-dom'
+import { useAuth } from '../../context/AuthContext'
+import Stars from '../Stars'
 
 function ResultCard({ feedback }) {
-  const { userData } = useAuth();
-  const stars = feedback.confidence_score;
+  const { userData } = useAuth()
+  const stars = feedback.confidence_score
   // let GrammarScore = feedback.grammer_score;
 
-  var GrammerLevel;
+  var GrammerLevel
   if (feedback.grammer_score > 0.8) {
-    GrammerLevel = "Excellent";
+    GrammerLevel = 'Excellent'
   } else if (feedback.grammer_score <= 0.8 && feedback.grammer_score > 0.6) {
-    GrammerLevel = "Good";
+    GrammerLevel = 'Good'
   } else if (feedback.grammer_score <= 0.6 && feedback.grammer_score > 0.3) {
-    GrammerLevel = "Average";
+    GrammerLevel = 'Average'
   } else {
-    GrammerLevel = "Poor";
+    GrammerLevel = 'Poor'
   }
-  console.log("aadiadiaidai", GrammerLevel);
+  console.log('aadiadiaidai', GrammerLevel)
 
-  console.log("Stars:", stars);
-  console.log("hello hardik",feedback.grammer_score)
+  console.log('Stars:', stars)
+  console.log('hello hardik', feedback.grammer_score)
 
   // console.log("Feedback:", feedback);
 
@@ -60,7 +60,7 @@ function ResultCard({ feedback }) {
             <div className="text-4xl font-bold">
               Confidence Rating:
               <div className="justify-items-center text-5xl mt-2">
-                <Stars stars={stars + 1} />{" "}
+                <Stars stars={stars + 1} />{' '}
               </div>
             </div>
             <div className="text-4xl font-bold">
@@ -73,7 +73,7 @@ function ResultCard({ feedback }) {
 
           <div className="text-center py-10 mt-5 ">
             <Link
-              to={"/"}
+              to={'/'}
               className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300  font-medium rounded-lg text-sm px-5 py-4 text-center mt-8 cursor-pointer "
             >
               Go To Dashboard
@@ -82,7 +82,7 @@ function ResultCard({ feedback }) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default ResultCard;
+export default ResultCard

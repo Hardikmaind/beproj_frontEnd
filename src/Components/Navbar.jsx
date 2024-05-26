@@ -1,22 +1,22 @@
-import React from "react";
-import { getAuth, signOut } from "firebase/auth";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import React from 'react'
+import { getAuth, signOut } from 'firebase/auth'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 
 const Navbar = () => {
-  const auth = getAuth();
-  const navigate = useNavigate(); // Access the navigate function
-  const { userData } = useAuth();
+  const auth = getAuth()
+  const navigate = useNavigate() // Access the navigate function
+  const { userData } = useAuth()
 
   const handleSignOut = async () => {
-    localStorage.removeItem('is_registered');
-    localStorage.removeItem('user');
-    localStorage.clear();
-    await auth.signOut();
-    navigate("/");
+    localStorage.removeItem('is_registered')
+    localStorage.removeItem('user')
+    localStorage.clear()
+    await auth.signOut()
+    navigate('/')
     // Redirect to home page or display sign-out message
-    console.log("you have been signed out");
-  };
+    console.log('you have been signed out')
+  }
   return (
     <div>
       <nav className="bg-blue-800 px-3 py-6">
@@ -92,7 +92,7 @@ const Navbar = () => {
         </div>
       </nav>
     </div>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

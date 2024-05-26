@@ -1,30 +1,30 @@
 // Signup.jsx
-import React, { useState } from "react";
-import { useAuth } from "../context/AuthContext"; // Import the AuthContext
+import React, { useState } from 'react'
+import { useAuth } from '../context/AuthContext' // Import the AuthContext
 
 function Signup({ showLogin, setShowLogin }) {
   const toggleLogin = () => {
-    setShowLogin(!showLogin);
-  };
+    setShowLogin(!showLogin)
+  }
 
-  const auth = useAuth(); // Use the useAuth hook to get authentication context
+  const auth = useAuth() // Use the useAuth hook to get authentication context
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     try {
       // Use signUp function from the context
-      await auth.signUp(email, password);
-      console.log("I am registered successfully");
+      await auth.signUp(email, password)
+      console.log('I am registered successfully')
       // Redirect to protected route or display success message
     } catch (error) {
-      console.error(error);
+      console.error(error)
       // Display error message to the user
     }
-  };
+  }
 
   return (
     <>
@@ -105,7 +105,7 @@ function Signup({ showLogin, setShowLogin }) {
                       htmlFor="terms"
                       className="font-light text-gray-500 "
                     >
-                      I accept the{" "}
+                      I accept the{' '}
                       <a
                         className="font-medium text-primary-600 hover:underline "
                         href="#"
@@ -122,7 +122,7 @@ function Signup({ showLogin, setShowLogin }) {
                   Create an account
                 </button>
                 <p className="text-sm font-light text-gray-500 ">
-                  Already have an account?{" "}
+                  Already have an account?{' '}
                   <button
                     onClick={() => toggleLogin()}
                     className="font-medium text-[#2563eb] hover:underline "
@@ -136,7 +136,7 @@ function Signup({ showLogin, setShowLogin }) {
         </div>
       </section>
     </>
-  );
+  )
 }
 
-export default Signup;
+export default Signup

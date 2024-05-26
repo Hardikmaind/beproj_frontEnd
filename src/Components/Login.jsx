@@ -1,37 +1,35 @@
 // Login.jsx
-import React, { useState } from "react";
-import { useAuth } from "../context/AuthContext"; // Import the AuthContext
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react'
+import { useAuth } from '../context/AuthContext' // Import the AuthContext
+import { useNavigate } from 'react-router-dom'
 import { Toaster, toast } from 'sonner'
 
-
 const Login = ({ showLogin, setShowLogin }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const toggleLogin = () => {
-    setShowLogin(!showLogin);
-  };
+    setShowLogin(!showLogin)
+  }
 
-  const auth = useAuth(); // Use the useAuth hook to get authentication context
-  const navigate = useNavigate();
+  const auth = useAuth() // Use the useAuth hook to get authentication context
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     try {
-      const res=await auth.logIn(email, password); // Use signIn function from the context
+      const res = await auth.logIn(email, password) // Use signIn function from the context
       console.log(res)
-      console.log("Logged in");
-      navigate("/", { replace: true }); // Redirect to the protected route
+      console.log('Logged in')
+      navigate('/', { replace: true }) // Redirect to the protected route
       toast.success('YOU HAVE LOGGED IN SUCCESSFULLY!')
-
     } catch (error) {
-      console.error(error);
+      console.error(error)
       // Display error message to the user
-      console.log("this is the error")
+      console.log('this is the error')
       toast.error('Invalid Credentials! Please try again.')
     }
-  };
+  }
 
   return (
     <>
@@ -115,7 +113,7 @@ const Login = ({ showLogin, setShowLogin }) => {
                   Sign in
                 </button>
                 <p className="text-sm font-light text-gray-500 ">
-                  Don’t have an account yet?{" "}
+                  Don’t have an account yet?{' '}
                   <button
                     onClick={() => toggleLogin()}
                     className="font-medium text-primary-600 hover:underline"
@@ -129,7 +127,7 @@ const Login = ({ showLogin, setShowLogin }) => {
         </div>
       </section>
     </>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

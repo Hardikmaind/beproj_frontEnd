@@ -1,9 +1,9 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
-import AxiosInstance from "../api/AxiosInstance";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
+import AxiosInstance from '../api/AxiosInstance'
+import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 
 const InterViewModal = ({ toggleInterviewModal }) => {
   // const [interviewData, setInterviewData] = useState({
@@ -19,26 +19,26 @@ const InterViewModal = ({ toggleInterviewModal }) => {
     // setUIno,
     // InterviewType,
     // setInterviewType,
-  } = useAuth();
+  } = useAuth()
   // console.log("Interview Id: ",currentUser.uid);
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const createInterviewId = async (argument,event) => {
-    event.preventDefault();
+  const createInterviewId = async (argument, event) => {
+    event.preventDefault()
 
     try {
-      const res = await AxiosInstance.post("InterviewCreate-id/", {
+      const res = await AxiosInstance.post('InterviewCreate-id/', {
         user_id: currentUser.uid,
         interview_type: argument,
-      });
+      })
 
-      console.log("API Response:", res.data);
-      if(localStorage.getItem("userId") === null){
-        localStorage.setItem("userId", res.data.user);
+      console.log('API Response:', res.data)
+      if (localStorage.getItem('userId') === null) {
+        localStorage.setItem('userId', res.data.user)
       }
-      localStorage.setItem("interviewType", res.data.type_of_interview);
-      localStorage.setItem("interviewId", res.data.interview_id);
+      localStorage.setItem('interviewType', res.data.type_of_interview)
+      localStorage.setItem('interviewId', res.data.interview_id)
       // setInterviewData();
       // console.log("Interview Data: ", interviewData);
       // setUIno(res.data.user_interview_no);
@@ -46,16 +46,16 @@ const InterViewModal = ({ toggleInterviewModal }) => {
       // console.log("Interview Id: ", UIno);
       // console.log("Interview Type: ", InterviewType);
 
-      if (argument === "Technical") {
-        navigate("/Technical-Interview");
+      if (argument === 'Technical') {
+        navigate('/Technical-Interview')
       }
-      if (argument === "HR") {
-        navigate("/HR-Interview");
+      if (argument === 'HR') {
+        navigate('/HR-Interview')
       }
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   // useEffect(() => {
   //   console.log("User Id number: ", UIno); // Log after state update
@@ -65,20 +65,20 @@ const InterViewModal = ({ toggleInterviewModal }) => {
   // Close modal when clicking outside or pressing Escape key
   useEffect(() => {
     const handleOutsideClick = (e) => {
-      if (e.target.classList.contains("fixed")) {
-        toggleInterviewModal();
+      if (e.target.classList.contains('fixed')) {
+        toggleInterviewModal()
       }
-    };
+    }
 
     const handleEscapeKey = (e) => {
-      if (e.key === "Escape") {
-        toggleInterviewModal();
+      if (e.key === 'Escape') {
+        toggleInterviewModal()
       }
-    };
+    }
 
-    document.addEventListener("mousedown", handleOutsideClick);
-    document.addEventListener("keydown", handleEscapeKey);
-  }, [toggleInterviewModal]);
+    document.addEventListener('mousedown', handleOutsideClick)
+    document.addEventListener('keydown', handleEscapeKey)
+  }, [toggleInterviewModal])
 
   return (
     <div className="fixed inset-0 bg-gray-900 bg-opacity-5 backdrop-blur-md flex justify-center items-center ">
@@ -127,7 +127,7 @@ const InterViewModal = ({ toggleInterviewModal }) => {
               />
               <button
                 onClick={(e) => {
-                  createInterviewId("Technical",e);
+                  createInterviewId('Technical', e)
                   // navigate("/Technical-Interview");
                 }}
                 htmlFor="job-1"
@@ -168,7 +168,7 @@ const InterViewModal = ({ toggleInterviewModal }) => {
               />
               <button
                 onClick={(e) => {
-                  createInterviewId("HR",e);
+                  createInterviewId('HR', e)
                 }}
                 htmlFor="job-2"
                 className="inline-flex items-center justify-between w-full p-5 text-gray-900 bg-white border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100"
@@ -206,7 +206,7 @@ const InterViewModal = ({ toggleInterviewModal }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default InterViewModal;
+export default InterViewModal

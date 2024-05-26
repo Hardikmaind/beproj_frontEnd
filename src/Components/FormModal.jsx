@@ -1,37 +1,34 @@
-
-import React from "react";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import {useAuth}  from '../context/AuthContext' // Update the path
-import AxiosInstance from "../api/AxiosInstance";
-
+import React from 'react'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import { useAuth } from '../context/AuthContext' // Update the path
+import AxiosInstance from '../api/AxiosInstance'
 
 const FormModal = () => {
- 
-  const { currentUser } = useAuth();
+  const { currentUser } = useAuth()
 
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(true)
   const [formData, setFormData] = useState({
-    user_name: "",
-    gender: "",
-  });
+    user_name: '',
+    gender: '',
+  })
 
   // State to handle loading state while fetching user data
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     // Check if currentUser is defined before accessing methods
     if (currentUser) {
-      setLoading(false);
+      setLoading(false)
     }
-  }, [currentUser]);
+  }, [currentUser])
 
   const closeModal = () => {
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     // if (!formData.user_name || !formData.gender) {
     //   alert("Please fill in all required fields");
@@ -42,35 +39,35 @@ const FormModal = () => {
       // Check if currentUser is defined before accessing methods
       if (!currentUser) {
         // Handle the case when currentUser is not available
-        console.error("Current user not available");
-        return;
+        console.error('Current user not available')
+        return
       }
 
-      const idToken = await currentUser.getIdToken();
+      const idToken = await currentUser.getIdToken()
 
-      const response = await AxiosInstance.post("create_user/", {
+      const response = await AxiosInstance.post('create_user/', {
         user_name: formData.user_name,
         gender: formData.gender,
         firebase_id_token: idToken,
-      });
+      })
 
-      console.log("API call success", response.data);
-      closeModal();
+      console.log('API call success', response.data)
+      closeModal()
     } catch (error) {
-      console.error("API call error", error);
+      console.error('API call error', error)
       // Handle error as needed
     }
-  };
+  }
 
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-    });
-  };
+    })
+  }
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>
   }
 
   return (
@@ -78,7 +75,7 @@ const FormModal = () => {
       {/* Backdrop for blur effect */}
       <div
         className={`${
-          open ? "fixed inset-0 bg-black bg-opacity-70 z-40" : "hidden"
+          open ? 'fixed inset-0 bg-black bg-opacity-70 z-40' : 'hidden'
         }`}
       ></div>
 
@@ -89,8 +86,8 @@ const FormModal = () => {
         aria-hidden="true"
         className={`${
           open
-            ? "fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50"
-            : "hidden"
+            ? 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50'
+            : 'hidden'
         } bg-white overflow-y-auto overflow-x-hidden rounded-lg shadow-md`}
       >
         <div className="relative p-10 w-96">
@@ -156,7 +153,7 @@ const FormModal = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default FormModal;
+export default FormModal
