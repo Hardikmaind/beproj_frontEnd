@@ -161,20 +161,18 @@ const QA = (data) => {
           </span>
         </div>
       )}
-      {
-        confidenceLoading && (
-          <div className="flex flex-col justify-center items-center w-full mt-20 mb-20">
-              <img
-                className="object-cover pl-4 w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg "
-                src={ResultLoader}
-                alt=""
-              />
-              <span className="text-3xl font-bold text-blue-800 ">
-                Fetching your result
-              </span>
-            </div>
-        )
-      }
+      {confidenceLoading && (
+        <div className="flex flex-col justify-center items-center w-full mt-20 mb-20">
+          <img
+            className="object-cover pl-4 w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg "
+            src={ResultLoader}
+            alt=""
+          />
+          <span className="text-3xl font-bold text-blue-800 ">
+            Fetching your result
+          </span>
+        </div>
+      )}
       {!loading && !confidenceLoading && (
         <>
           <div className="w-7/12 h-fit mb-4 border mt-52 border-gray-200 rounded-3xl bg-white mx-auto shadow-2xl py-2">

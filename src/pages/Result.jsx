@@ -97,24 +97,27 @@ const Result = () => {
           )}
         </div>
         <div className="relative">
-          <button
-            type="button"
-            className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300  font-medium rounded-lg text-sm px-5 py-4 text-center mt-8 cursor-pointer "
-            onClick={() => {
-              toggleQAModal()
-              callApi()
-              setLoading(true)
-            }}
-          >
-            {loading ? (
-              <div className="flex  items-center gap-2">
-                Please Wait
-                <ImSpinner11 className="animate-spin" />
-              </div>
-            ) : (
-              'Click Here to see Detailed Analysis'
-            )}
-          </button>
+          {' '}
+          {feedback?.type_of_interview == 'Technical' ? (
+            <button
+              type="button"
+              className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300  font-medium rounded-lg text-sm px-5 py-4 text-center mt-8 cursor-pointer "
+              onClick={() => {
+                toggleQAModal()
+                callApi()
+                setLoading(true)
+              }}
+            >
+              {loading ? (
+                <div className="flex  items-center gap-2">
+                  Please Wait
+                  <ImSpinner11 className="animate-spin" />
+                </div>
+              ) : (
+                'Click Here to see Detailed Analysis'
+              )}
+            </button>
+          ) : null}
         </div>
       </div>
       {showModal && !loading && (
