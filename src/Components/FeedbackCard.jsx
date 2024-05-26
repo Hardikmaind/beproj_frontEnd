@@ -41,7 +41,7 @@ const FeedbackCard = ({ stars, Grammar, Accuracy, IID, IType }) => {
         <div>{Accuracy} Accuracy!</div>
       </div> */}
 
-      <div className="text-2xl font-semibold">grammar Level:</div>
+      <div className="text-2xl font-semibold">Grammar Level:</div>
       <div className="text-xl font-semibold text-blue-600">{GrammerLevel}</div>
     </div>
   )
