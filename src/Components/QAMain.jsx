@@ -8,6 +8,7 @@ import AxiosInstance from '../api/AxiosInstance'
 import Loader_gif from '../assets/images/Loader_gif.gif'
 import { ImSpinner11 } from 'react-icons/im'
 import { useNavigate } from 'react-router-dom'
+import ResultLoader from '../assets/images/ResultLoader.gif'
 
 const QA = (data) => {
   const [isHovered, setIsHovered] = useState(false)
@@ -17,6 +18,7 @@ const QA = (data) => {
   const [recordingUrl, setRecordingUrl] = useState(null)
   const [recordedAudioBlob, setRecordedAudioBlob] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [confidenceLoading, setConfidenceLoading] = useState(false)
   console.log(recordedAudioBlob)
   // const [recordingStopped, setRecordingStopped] = useState(false);
   const handleUpload = async (recordedAudioBlob) => {
@@ -121,6 +123,7 @@ const QA = (data) => {
   }
 
   const getConfidence = async () => {
+    setConfidenceLoading(true)
     try {
       const postData = {
         interviewid: localStorage.getItem('interviewId'),
@@ -131,6 +134,8 @@ const QA = (data) => {
       console.log('Confifence score is :', res.data)
     } catch (error) {
       console.error('Error sending User ID:', error)
+    } finally {
+      setConfidenceLoading(false)
     }
   }
 
@@ -156,7 +161,21 @@ const QA = (data) => {
           </span>
         </div>
       )}
-      {!loading && (
+      {
+        confidenceLoading && (
+          <div className="flex flex-col justify-center items-center w-full mt-20 mb-20">
+              <img
+                className="object-cover pl-4 w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg "
+                src={ResultLoader}
+                alt=""
+              />
+              <span className="text-3xl font-bold text-blue-800 ">
+                Fetching your result
+              </span>
+            </div>
+        )
+      }
+      {!loading && !confidenceLoading && (
         <>
           <div className="w-7/12 h-fit mb-4 border mt-52 border-gray-200 rounded-3xl bg-white mx-auto shadow-2xl py-2">
             <div className="px-5 py-3">
